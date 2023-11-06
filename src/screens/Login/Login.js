@@ -67,7 +67,7 @@ class Login extends Component{
                     <TouchableOpacity onPress={() => this.login(this.state.email, this.state.password)} >
                         <Text> Enviar </Text>
                     </TouchableOpacity>
-                    {this.state.errorMessage !== ''? <Text >{this.state.errorMessage}</Text> : ''}
+                    {this.state.errorMessage !== ''? <Text style={styles.input}>{this.state.errorMessage}</Text> : ''}
                     {console.log('Logueado',this.state.loggedIN)}
                 </View>
 
@@ -76,11 +76,11 @@ class Login extends Component{
             </View>
 
 
-            {/* <View>
+            <View style={styles.input}>
              <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Register')} >
                     <Text> No tengo cuenta. Ir a registrarme </Text>
             </TouchableOpacity>
-            </View> */}
+            </View>
 
 
             </View>
@@ -117,7 +117,6 @@ const styles = StyleSheet.create({
     textButton:{
         color: '#fff'
     }
-
 })
 
 export default Login
