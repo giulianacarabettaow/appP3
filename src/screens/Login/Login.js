@@ -36,6 +36,10 @@ class Login extends Component{
         })
     }
 
+    irHome(){
+        this.props.navigation.navigate("Menu")
+    }
+
     render(){
         return(
             <View>
@@ -76,6 +80,9 @@ class Login extends Component{
                 </View>
 
             }
+                <View>
+                    <TouchableOpacity onPress={()=>this.irHome()}></TouchableOpacity>
+                </View>
             </View>
 
 
