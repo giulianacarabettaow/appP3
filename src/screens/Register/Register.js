@@ -10,10 +10,7 @@ class Register extends Component {
             username:'',
             password:'',
             errorMessage: '',
-            registered: false,
-            noEmail: false,
-            noPassword:false,
-            noUsername:false
+            registered: false
         }
         console.log(this.state)
     }
@@ -22,14 +19,21 @@ class Register extends Component {
 
 register (email,pass){
     auth.createUserWithEmailAndPassword(email,pass)
-    .then((response)=>{
-        this.setState({registered: true});
-        console.log(response) //en user del objeto response que devuelve firebase hay mucha data del usuario registrado
-    })
+    .then(()=>{
+        this.setState({
+            registered:true
+        })
+      })
+    .then(() => (
+         this.state.password != '' && this.state.email != '' && this.state.userName  ? this.props.navigation.navigate('Login') : false    
+    ))
+    
     .catch( error => {
         this.setState({errorMessage: error.message},()=>console.log(this.state, error))
     })
 }
+
+
 
 render(){
     return(
@@ -74,11 +78,17 @@ render(){
                                 <Text> Enviar </Text>
                             </TouchableOpacity>
                             {this.state.errorMessage ? <Text >{this.state.errorMessage}</Text> : false}
-                            <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Login')} >
-                                <Text> Ya tengo cuenta. Ir a Login </Text>
-                            </TouchableOpacity>
+                            {console.log('Registrado', this.state.registered)}
+                            {/* {this.state.registered ? <Text >Registrado correctamente!</Text> : ''} */}
+                            
                     </View>
             }
+            <View style={styles.input}>
+            <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Login')} >
+                <Text> Ya tengo cuenta. Ir a Login </Text>
+            </TouchableOpacity>
+            </View>
+
             </View>
         </View>
         )

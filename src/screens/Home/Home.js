@@ -10,18 +10,19 @@ class Home extends Component {
         }
     }
 
-    logout(){
-        auth.signOut();
-         //Redirigir al usuario a la home del sitio.
-        // this.props.navigation.navigate('Login')
-    }
+    // logout(){
+    //     auth.signOut();
+    //      Redirigir al usuario a la home del sitio.
+    //      this.props.navigation.navigate('Login')
+    // }
 
 
 
     render(){
         return(
             <View>
-                <Text>HOME</Text>
+                {console.log('estoy en home')}
+                <Text style={styles.input}>HOME</Text>
                 <TouchableOpacity onPress={()=>this.logout()}>
                     <Text>Logout</Text>
                 </TouchableOpacity>
@@ -29,7 +30,36 @@ class Home extends Component {
         )
     }
 }
+const styles = StyleSheet.create({
+    formContainer:{
+        paddingHorizontal:10,
+        marginTop: 20,
+    },
+    input:{
+        height:20,
+        paddingVertical:15,
+        paddingHorizontal: 10,
+        borderWidth:1,
+        borderColor: '#ccc',
+        borderStyle: 'solid',
+        borderRadius: 6,
+        marginVertical:10,
+    },
+    button:{
+        backgroundColor:'#28a745',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius:4,
+        borderWidth:1,
+        borderStyle: 'solid',
+        borderColor: '#28a745'
+    },
+    textButton:{
+        color: '#fff'
+    }
 
+})
 
 
 export default Home;

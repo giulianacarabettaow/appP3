@@ -10,10 +10,12 @@ function Menu (){
     return(
         <Tab.Navigator>
             <Tab.Screen name='Home' component={Home}  options={ { headerShown: false }}/>
-            <Tab.Screen name='New Post' component={PostForm}  options={ { headerShown: false }}/>            
+            {/* <Tab.Screen name='New Post' component={PostForm}  options={ { headerShown: false }}/>             */}
         </Tab.Navigator>
     )
 }
+
+
 
 
 export default Menu;

@@ -21,23 +21,14 @@ class Login extends Component{
         .then(()=>{
             this.setState({
                 loggedIN:true
-            },  console.log(this.state))
-        })
-        .then(()=>{
-            if(this.state.loggedIN == true){
-                this.setState({
-                    password:'',
-                    email:'',
-                })
-            }
-        })
+            })
+          })
+        .then(() => (
+             this.state.password != '' && this.state.email != ''  ? this.props.navigation.navigate('Menu') : false    
+        )) 
         .catch( error => {
             this.setState({errorMessage: error.message},()=>console.log(this.state, error))
         })
-    }
-
-    irHome(){
-        this.props.navigation.navigate("Menu")
     }
 
     render(){
@@ -77,12 +68,11 @@ class Login extends Component{
                         <Text> Enviar </Text>
                     </TouchableOpacity>
                     {this.state.errorMessage !== ''? <Text >{this.state.errorMessage}</Text> : ''}
+                    {console.log('Logueado',this.state.loggedIN)}
                 </View>
 
             }
-                <View>
-                    <TouchableOpacity onPress={()=>this.irHome()}></TouchableOpacity>
-                </View>
+        
             </View>
 
 
