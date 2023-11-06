@@ -10,13 +10,12 @@ class Home extends Component {
         }
     }
 
-    // logout(){
-    //     auth.signOut();
-    //      Redirigir al usuario a la home del sitio.
-    //      this.props.navigation.navigate('Login')
-    // }
-
-
+    // logut va en en el perfil
+     logout(){
+         auth.signOut();
+        //   Redirigir al usuario a la home del sitio.
+          this.props.navigation.navigate('Login')
+     }
 
     render(){
         return(
