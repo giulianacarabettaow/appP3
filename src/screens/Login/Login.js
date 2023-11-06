@@ -21,8 +21,7 @@ class Login extends Component{
         .then(()=>{
             this.setState({
                 loggedIN:true
-            },  console.log(this.state)),
-               
+            },  console.log(this.state))
         })
         .then(()=>{
             if(this.state.loggedIN == true){
@@ -34,7 +33,6 @@ class Login extends Component{
         })
         .catch( error => {
             this.setState({errorMessage: error.message},()=>console.log(this.state, error))
-
         })
     }
 
