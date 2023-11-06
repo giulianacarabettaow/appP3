@@ -1,19 +1,35 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import react, { Component } from 'react';
+import {TextInput, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
+import { auth } from '../../firebase/config';
 
-import Home from '../../screens/Home/Home';
-import PostForm from '../../screens/PostForm/PostForm';
+class Home extends Component {
+    constructor(){
+        super()
+        this.state={
+      
+        }
+    }
 
-const Tab = createBottomTabNavigator();
+    logout(){
+        auth.signOut();
+         //Redirigir al usuario a la home del sitio.
+        // this.props.navigation.navigate('Login')
+    }
 
-function Menu (){
 
-    return(
-        <Tab.Navigator>
-            <Tab.Screen name='Home' component={Home}  options={ { headerShown: false }}/>
-            <Tab.Screen name='New Post' component={PostForm}  options={ { headerShown: false }}/>            
-        </Tab.Navigator>
-    )
+
+    render(){
+        return(
+            <View>
+                <Text>HOME</Text>
+                <TouchableOpacity onPress={()=>this.logout()}>
+                    <Text>Logout</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 }
 
 
-export default Menu;
+
+export default Home;
