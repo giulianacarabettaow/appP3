@@ -13,7 +13,7 @@ export default function App() {
 
       <NavigationContainer style={styles.container}>
         <Tab.Navigator>
-        <Tab.Screen name='Register' component={Register} options={{headerShown :false}} />
+          <Tab.Screen name='Register' component={Register} options={{headerShown :false}} />
           <Tab.Screen name='Login' component={Login} options={{headerShown :false}} />
         </Tab.Navigator>
       </NavigationContainer>
