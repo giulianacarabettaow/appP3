@@ -26,6 +26,7 @@ register (email,pass){
       })
     .then(() => (
          this.state.password != '' && this.state.email != '' && this.state.username  ? this.props.navigation.navigate('Login') : false    
+         
     ))
     
     .catch( error => {
