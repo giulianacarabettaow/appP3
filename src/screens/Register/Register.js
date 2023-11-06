@@ -18,9 +18,7 @@ class Register extends Component {
         console.log(this.state)
     }
 
-    componentDidMount(){
-        console.log('anda el didMount?')
-    }
+
 
 register (email,pass){
     auth.createUserWithEmailAndPassword(email,pass)
@@ -29,50 +27,9 @@ register (email,pass){
         console.log(response) //en user del objeto response que devuelve firebase hay mucha data del usuario registrado
     })
     .catch( error => {
-        this.setState({errorMessage: error.message}
-        )
-        // console.log(this.state.errorMessage)
+        this.setState({errorMessage: error.message},()=>console.log(this.state, error))
     })
 }
-
-// noEmail(text){
-//     text === '' ?
-//        this.setState({
-//            noEmail: true,
-//            errorMessage: 'Ingresa tu email.'
-//        })
-//    :
-//        this.setState({
-//            noEmail: false,
-//            errorMessage: ''
-//        })
-// }
-
-// noPassword(text){
-//     text === '' ?
-//        this.setState({
-//            noPassword: true,
-//            errorMessage: 'Crea tu contraseña'
-//        })
-//    :
-//        this.setState({
-//            noPassword: false,
-//            errorMessage: ''
-//        })
-// }
-
-// noUsername(text){
-//     text === '' ?
-//        this.setState({
-//            noUsername: true,
-//            errorMessage: 'Crea tu nombre de usuario'
-//        })
-//    :
-//        this.setState({
-//            noUsername: false,
-//            errorMessage: ''
-//        })
-// }
 
 render(){
     return(
@@ -106,10 +63,10 @@ render(){
             {
              this.state.password === '' || this.state.email === '' ||  this.state.username === '' ?
                     <View style={styles.input}>
-                            <TouchableOpacity style={styles.button}>
-                                <Text onPress={()=>  this.setState({errorMessage: 'COMPLETA LA INFO'})}> Enviar </Text>
+                            <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password)}>
+                                <Text> Enviar </Text>
                             </TouchableOpacity>
-                                {this.state.errorMessage ? <Text >{this.state.errorMessage}</Text> : false}
+                            {this.state.errorMessage !== ''? <Text >Completa todos los campos</Text> : false}
                     </View>
                             :
                     <View style={styles.input}>

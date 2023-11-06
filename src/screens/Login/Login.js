@@ -13,26 +13,28 @@ class Login extends Component{
         }
         console.log(this.state)
     }
+
+    
 //no andan los setStates 
     login (email,pass){
         auth.signInWithEmailAndPassword(email,pass)
         .then(()=>{
             this.setState({
                 loggedIN:true
-            })
-            console.log(this.state)
-            //hacer el mismo if en registro
-            if(loggedIN == true){
+            },  console.log(this.state)),
+               
+        })
+        .then(()=>{
+            if(this.state.loggedIN == true){
                 this.setState({
                     password:'',
                     email:'',
-                    loggedIN:false,
                 })
             }
         })
         .catch( error => {
-            console.log(error)
-            this.setState({errorMessage: error.message})
+            this.setState({errorMessage: error.message},()=>console.log(this.state, error))
+
         })
     }
 
@@ -61,20 +63,30 @@ class Login extends Component{
             <View>
             {
                 this.state.password === '' || this.state.email === '' ?
-                    <TouchableOpacity onPress={() => this.setState({errorMessage: 'Incomplete field'})} >
-                        <Text style={styles.button}> Completa los campos </Text>
+                <View style={styles.input}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.login(this.state.email, this.state.password)} >
+                        <Text > Enviar </Text>
                     </TouchableOpacity>
-                    
+                    {this.state.errorMessage !== ''? <Text >Completa ambos campos</Text> : ''}
+                </View>
                 :
+                <View style={styles.input}>
                     <TouchableOpacity onPress={() => this.login(this.state.email, this.state.password)} >
-                        <Text> Submit </Text>
+                        <Text> Enviar </Text>
                     </TouchableOpacity>
+                    {this.state.errorMessage !== ''? <Text >{this.state.errorMessage}</Text> : ''}
+                </View>
 
             }
+            </View>
+
+
+            {/* <View>
              <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Register')} >
                     <Text> No tengo cuenta. Ir a registrarme </Text>
             </TouchableOpacity>
-            </View>
+            </View> */}
+
 
             </View>
         )
@@ -98,11 +110,11 @@ const styles = StyleSheet.create({
         marginVertical:10,
     },
     button:{
-        backgroundColor:'blue',
+        backgroundColor:'#28a745',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
-        borderRadius:4, 
+        borderRadius:4,
         borderWidth:1,
         borderStyle: 'solid',
         borderColor: '#28a745'
