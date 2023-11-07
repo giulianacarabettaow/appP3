@@ -16,6 +16,8 @@ class PostForm extends Component {
         db.collection('posts').add({
             owner: owner,
             post: post,
+            likes:[],
+            comments:[],
             createdAt: createdAt
         })
 
