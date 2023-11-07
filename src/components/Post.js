@@ -10,27 +10,30 @@ class Post extends Component {
         this.state={
             email: this.props.postInfo.data.owner,
             texto: this.props.postInfo.data.post,
-            // howMuchLikes: this.props.postInfo.data.likes.length, deberia andar este, no el de abajo. el de abajo es provisorio
-            countLikes:[],
+            howMuchLikes: this.props.postInfo.data.likes.length, 
             myLike: false,
         }
     }
 
     componentDidMount(){
         // chequar si Mylike es true o false
+        if (this.props.postInfo.data.likes.includes(auth.currentUser.email)) {
+            this.setState({
+                myLike: true
+            })
+        }console.log(this.state)
     }
 
     like(){
         db.collection('posts').doc(this.props.postInfo.id).update({
             likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
-            .then(() => {
-                this.setState({
-                    myLike: true,
-                    countLikes: this.state.countLikes + 1,
-                    howMuchLikes: this.state.howMuchLikes + 1
-                })
+        .then(() => {
+            this.setState({
+                myLike: true,
+                howMuchLikes: this.state.howMuchLikes + 1 })
             })
+            .then(()=> console.log(this.state))
             .catch(e => console.log(e))
     }
 
@@ -41,23 +44,24 @@ class Post extends Component {
             .then(() => {
                 this.setState({
                     myLike: false,
-                    countLikes: this.state.countLikes - 1,
                     howMuchLikes: this.state.howMuchLikes - 1
                 })
             })
+            .then(()=> console.log(this.state))
             .catch(e => console.log(e))
     }
     render(){
-        // console.log('en post', this.props)
+
         return(
           
            <View>
             <Text>Datos del Post</Text>
             <Text>{this.state.email}</Text>
             <Text>{this.state.texto}</Text>
-            <Text>{this.state.countLikes}</Text>
-            {/* Likear */}
-            {this.state.myLike === true ?  
+            <Text style={styles.input}># likes: {this.state.howMuchLikes.length}</Text>
+
+
+            {this.state.myLike  ?  
             <TouchableOpacity onPress={()=> this.dislike()}>
                 Dislike
             </TouchableOpacity> 
