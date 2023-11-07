@@ -10,8 +10,12 @@ class Post extends Component {
         this.state={
             email: this.props.postInfo.data.owner,
             texto: this.props.postInfo.data.post,
-            howMuchLikes: this.props.postInfo.data.likes.length, 
+            howManyLikes: this.props.postInfo.data.likes.length, 
+            howManyComments:this.props.postInfo.data.comments.length,
             myLike: false,
+            comment: '',
+            userInfo:[],
+            userLoggedInfo:[]
         }
     }
 
@@ -22,6 +26,30 @@ class Post extends Component {
                 myLike: true
             })
         }console.log(this.state)
+// Lo usamos para traer el nombre de usuario del creador de cada posteo
+        db.collection("user").where("owner", '==', this.state.email).onSnapshot((docs) => {
+            let userInfo = [];
+            docs.forEach((doc) => {
+              userInfo.push({
+                data: doc.data()
+              })
+            });
+            this.setState({
+              userInfo: userInfo,
+            });
+        }); console.log(this.state)
+// Lo usamos para traer el nombre de usuario logueado. Para que aparezca el nombre del usuario que hizo el comentario, en el obj lit del comentario dentro del documento del post
+        db.collection("user").where("owner", '==', auth.currentUser.email).onSnapshot((docs) => {
+            let userLoguedInfo = [];
+            docs.forEach((doc) => {
+            userLoguedInfo.push({
+                data: doc.data()
+            })
+            });
+            this.setState({
+            userLoguedInfo: userLoguedInfo,
+            });
+        });       
     }
 
     like(){
@@ -31,7 +59,7 @@ class Post extends Component {
         .then(() => {
             this.setState({
                 myLike: true,
-                howMuchLikes: this.state.howMuchLikes + 1 })
+                howManyLikes: this.state.howManyLikes + 1 })
             })
             .then(()=> console.log(this.state))
             .catch(e => console.log(e))
@@ -44,11 +72,32 @@ class Post extends Component {
             .then(() => {
                 this.setState({
                     myLike: false,
-                    howMuchLikes: this.state.howMuchLikes - 1
+                    howManyLikes: this.state.howManyLikes - 1
                 })
             })
             .then(()=> console.log(this.state))
             .catch(e => console.log(e))
+    }
+    comment(comment){
+        if (comment !== ''){
+            const commentToSave = {
+              ownerUsername: this.state.userLoguedInfo[0]?.data.username,
+              email: auth.currentUser.email,
+              createdAt: Date.now(),
+              texto: comment
+            }
+            db.collection('posts').doc(this.props.postInfo.id).update({
+                comments: firebase.firestore.FieldValue.arrayUnion(commentToSave)
+            })
+            .then(() => {
+                  this.setState({
+                  comment: '',
+                  howManyComments: this.state.howManyComments + 1
+              });
+            })
+            .then(()=> console.log('andan los comentarios',this.state.comment))
+          .catch(e => console.log(e))
+        }
     }
     render(){
 
@@ -58,8 +107,11 @@ class Post extends Component {
             <Text>Datos del Post</Text>
             <Text>{this.state.email}</Text>
             <Text>{this.state.texto}</Text>
-            <Text style={styles.input}># likes: {this.state.howMuchLikes.length}</Text>
+            <Text>{this.state.userInfo[0]?.data.username}</Text>
 
+            <Text style={styles.input}># likes: {this.state.howManyLikes.length}</Text>
+            <Text style={styles.input}># Comentarios: {this.state.howManyComments.length}</Text>
+            
 
             {this.state.myLike  ?  
             <TouchableOpacity onPress={()=> this.dislike()}>
@@ -72,7 +124,18 @@ class Post extends Component {
                 Like
             </TouchableOpacity>
             }
-          
+            <View>
+                <TextInput
+                    style={styles.input}
+                    keyboardType='default'
+                    placeholder='Escribir comentario...'
+                    onChangeText={ text => this.setState({comment:text}) }                        
+                    value={this.state.comment}
+                    />
+                <TouchableOpacity onPress={() => this.comment(this.state.comment)}>
+                    <Text style={styles.boton}>Comment</Text>
+                </TouchableOpacity>
+            </View>
 
            </View>
         )

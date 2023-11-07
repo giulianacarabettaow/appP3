@@ -29,7 +29,8 @@ class Register extends Component {
     .then(()=>(db.collection('user').add({
             owner: auth.currentUser.email,
             username: username,
-            createdAt: Date.now()})
+            createdAt: Date.now()
+        })
         ))
 
     .then( ()=>{this.setState({registered:true}) } )
