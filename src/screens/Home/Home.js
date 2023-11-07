@@ -1,13 +1,29 @@
 import react, { Component } from 'react';
-import {TextInput, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
-import { auth } from '../../firebase/config';
+import {TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import { db, auth } from '../../firebase/config';
 
 class Home extends Component {
     constructor(){
         super()
         this.state={
-      
+            postList:[],
+            loader: true
         }
+    }
+
+
+    componentDidMount(){
+        db.collection('posts').onSnapshot(
+            docs => {
+                let postsShown = [];
+
+                docs.forEach(unPost=>{
+                    postsShown.push({
+                        id: unPost.id,
+                        data: unPost.data()})
+                })
+            this.setState({ postList:postsShown, loader: false })
+            })
     }
 
     // logut va en en el perfil
@@ -17,8 +33,11 @@ class Home extends Component {
           this.props.navigation.navigate('Login')
      }
 
+
     render(){
+        console.log(this.state)
         return(
+          
             <View>
                 {console.log('estoy en home')}
                 <Text style={styles.input}>HOME</Text>
@@ -26,6 +45,7 @@ class Home extends Component {
                     <Text>Logout</Text>
                 </TouchableOpacity>
             </View>
+          
         )
     }
 }

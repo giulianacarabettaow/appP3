@@ -6,19 +6,22 @@ class PostForm extends Component {
     constructor(){
         super()
         this.state= {
-            Post:''
+            Post:'',
+            posted:false
         }
         console.log(this.state)
     }
 
-    crearPost(post){
-        db.collection('Post').add({
-            owner: auth.currentUser.email,
+    crearPost(owner,post, createdAt){
+        db.collection('posts').add({
+            owner: owner,
             post: post,
-            createdAt: Date.now()
+            createdAt: createdAt
         })
 
-      .then(res => console.log(res))
+      .then(res => console.log(res), this.setState({posted:true}))
+      .then(()=>{this.state.posted ? this.setState({Post:''}): false})
+      .then(()=> console.log(this.state))
       .catch(e => console.log(e))
     }
 
@@ -35,7 +38,7 @@ class PostForm extends Component {
                         value={this.state.Post}
                     />
              </View>
-                <TouchableOpacity style={styles.button} onPress={()=>this.crearPost(this.state.Post)}>
+                <TouchableOpacity style={styles.button} onPress={()=>this.crearPost(auth.currentUser.email,this.state.Post, Date.now() )}>
                     <Text> Enviar </Text>
                 </TouchableOpacity>
             </View>

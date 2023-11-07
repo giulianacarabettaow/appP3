@@ -24,30 +24,21 @@ class Register extends Component {
         },console.log('aca',this.state))
     }
 
-
     register (email, pass, username){
     auth.createUserWithEmailAndPassword(email,pass)
-    .then(()=>{
-        this.setState({
-            registered:true
-        })
-      })
-    .then(()=>(
-        db.collection('user').add({
-                owner: auth.currentUser.email,
-                username: username,
-                createdAt: Date.now()
-            }
-        )
-    ))
-    .then(res => console.log(res))
+    .then(()=>(db.collection('user').add({
+            owner: auth.currentUser.email,
+            username: username,
+            createdAt: Date.now()})
+        ))
+
+    .then( ()=>{this.setState({registered:true}) } )
+    .then(()=>{this.state.registered ? this.setState({email:'', username:'',password:'',bio:'',img:''}): false})
     
     .catch( error => {
-        this.setState({errorMessage: error.message},()=>console.log(this.state, error))
-    })
+        this.setState({errorMessage: error.message},()=>console.log(this.state, error))})
     }           
 
-   
     render(){
         return(
             <View>
