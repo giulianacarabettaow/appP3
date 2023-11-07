@@ -1,5 +1,5 @@
 import react, { Component } from 'react';
-import { auth } from '../../firebase/config';
+import { db, auth } from '../../firebase/config';
 import { TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 
 class Register extends Component {
@@ -21,26 +21,33 @@ class Register extends Component {
     componentDidMount(){
         auth.onAuthStateChanged(user => {
             user !== null ? this.props.navigation.navigate('Menu') : this.setState({loader: false})
-        })
+        },console.log('aca',this.state))
     }
 
 
-    register (email,pass){
+    register (email, pass, username){
     auth.createUserWithEmailAndPassword(email,pass)
     .then(()=>{
         this.setState({
             registered:true
         })
       })
-     .then(() => (
-          this.state.password != '' && this.state.email != '' && this.state.username  ? this.props.navigation.navigate('Menu') : false    
+    .then(()=>(
+        db.collection('user').add({
+                owner: auth.currentUser.email,
+                username: username,
+                createdAt: Date.now()
+            }
+        )
     ))
+    .then(res => console.log(res))
     
     .catch( error => {
         this.setState({errorMessage: error.message},()=>console.log(this.state, error))
     })
     }           
 
+   
     render(){
         return(
             <View>
@@ -94,18 +101,18 @@ class Register extends Component {
                     {
                     this.state.password === '' || this.state.email === '' ||  this.state.username === '' ?
                             <View style={styles.input}>
-                                    <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password)}>
+                                    <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password,this.state.username)}>
                                         <Text> Enviar </Text>
                                     </TouchableOpacity>
                                     {this.state.errorMessage !== ''? <Text >Completa todos los campos obligatorios</Text> : false}
                             </View>
                                     :
                             <View style={styles.input}>
-                                    <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password)} >
+                                    <TouchableOpacity style={styles.button} onPress={()=>(this.register(this.state.email, this.state.password,this.state.username))}>
                                         <Text> Enviar </Text>
                                     </TouchableOpacity>
                                     {this.state.errorMessage ? <Text >{this.state.errorMessage}</Text> : false}
-                                    {console.log('Registrado', this.state.registered)}
+                                    {/* {console.log('Registrado', this.state)} */}
                                     
                             </View>
                     }
