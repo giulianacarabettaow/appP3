@@ -12,7 +12,7 @@ function Menu (){
         <Tab.Navigator>
             <Tab.Screen name='Home' component={Home}  options={ { headerShown: false }}/>
             <Tab.Screen name='PostForm' component={PostForm} options={{headerShown:false}}/>
-            {/* <Tab.Screen name='Comments' component={Comments} options={{headerShown:false}}/> */}
+            <Tab.Screen name='Comments' component={Comments} options={{headerShown:false}}/>
 
             {/* //aca van todas las pantallas de la aplicacion */}
         </Tab.Navigator>

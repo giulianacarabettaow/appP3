@@ -1,7 +1,7 @@
 import react, { Component } from 'react';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
-import firebase from 'firebase';
 import { db, auth } from '../firebase/config';
+import firebase from 'firebase';
 
 
 class Post extends Component {
