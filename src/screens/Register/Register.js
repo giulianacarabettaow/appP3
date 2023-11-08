@@ -34,7 +34,7 @@ class Register extends Component {
         ))
 
     .then( ()=>{this.setState({registered:true}) } )
-    .then(()=>{this.state.registered ? this.setState({email:'', username:'',password:'',bio:'',img:''}): false})
+    .then(()=>{this.setState({email:'', username:'',password:'',bio:'',img:''})})
     
     .catch( error => {
         this.setState({errorMessage: error.message},()=>console.log(this.state, error))})

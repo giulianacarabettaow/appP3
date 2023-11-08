@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../screens/Login/Login';
 import Register from '../screens/Register/Register';
 import Menu from './Menu';
+import Comments from '../screens/Comments/Comments';
 const Stack = createNativeStackNavigator();
 
 
@@ -26,6 +27,7 @@ class Principal extends Component {
               <Stack.Screen name='Register' component={Register} options={{headerShown :false}}  />
               <Stack.Screen name='Login' component={Login} options={{headerShown :false}} />
               <Stack.Screen name='Menu' component={Menu} options={{headerShown :false}} />
+              <Stack.Screen name='Comments' component={Comments} options={{headerShown :false}} />
             </Stack.Navigator>
     
           </NavigationContainer>

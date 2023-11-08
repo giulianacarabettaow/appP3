@@ -15,7 +15,8 @@ class Post extends Component {
             myLike: false,
             comment: '',
             userInfo:[],
-            userLoggedInfo:[]
+            userLoggedInfo:[], 
+            emptyComment:''
         }
     }
 
@@ -97,6 +98,8 @@ class Post extends Component {
             })
             .then(()=> console.log('andan los comentarios',this.state.comment))
           .catch(e => console.log(e))
+        }else{
+            this.setState({emptyComment: 'No puedes enviar un comentario vacío'})
         }
     }
     render(){
@@ -132,9 +135,17 @@ class Post extends Component {
                     onChangeText={ text => this.setState({comment:text}) }                        
                     value={this.state.comment}
                     />
+                
                 <TouchableOpacity onPress={() => this.comment(this.state.comment)}>
                     <Text style={styles.boton}>Comment</Text>
                 </TouchableOpacity>
+                {this.state.emptyComment != '' ? <Text>{this.state.emptyComment}</Text>: false}
+            </View>
+                {/* No anda la redireccion a Comments! */}
+            <View style={styles.input}>
+             <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Comments')} >
+                    <Text> Leer comentarios... </Text>
+            </TouchableOpacity>
             </View>
 
            </View>
