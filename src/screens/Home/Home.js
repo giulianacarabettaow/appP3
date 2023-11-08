@@ -11,8 +11,6 @@ class Home extends Component {
             loader: true
         }
     }
-
-
     componentDidMount(){
         db.collection('posts').onSnapshot(
             docs => {
