@@ -1,10 +1,10 @@
 import react, { Component } from 'react';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
-import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
+import { db, auth } from '../firebase/config';
 
 
-class Post extends Component {
+class User extends Component {
     constructor(props){
         super(props)
         this.state={
@@ -103,52 +103,11 @@ class Post extends Component {
         }
     }
     render(){
-        console.log(this.state.myLike)
         return(
           
-           <View>
-            <Text>Datos del Post</Text>
-            <Text>{this.state.email}</Text>
-            <Text>{this.state.texto}</Text>
-            <Text>{this.state.userInfo[0]?.data.username}</Text>
-
-            <Text style={styles.input}># likes: {this.state.howManyLikes.length}</Text>
-            <Text style={styles.input}># Comentarios: {this.state.howManyComments.length}</Text>
-            
-
-            {this.state.myLike  ?  
-            <TouchableOpacity onPress={()=> this.dislike()}>
-                Dislike
-            </TouchableOpacity> 
-            
-            :
-            
-            <TouchableOpacity onPress={()=> this.like()}>
-                Like
-            </TouchableOpacity>
-            }
-            <View>
-                <TextInput
-                    style={styles.input}
-                    keyboardType='default'
-                    placeholder='Escribir comentario...'
-                    onChangeText={ text => this.setState({comment:text}) }                        
-                    value={this.state.comment}
-                    />
-                
-                <TouchableOpacity onPress={() => this.comment(this.state.comment)}>
-                    <Text style={styles.boton}>Comment</Text>
-                </TouchableOpacity>
-                {this.state.emptyComment != '' ? <Text>{this.state.emptyComment}</Text>: false}
+            <View > 
+            <Text style={styles.input}> Email: {this.props.user.email} Username: {this.props.user.username} </Text>
             </View>
-                {/* No anda la redireccion a Comments! */}
-            <View style={styles.input}>
-             <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Comments')} >
-                    <Text> Leer comentarios... </Text>
-            </TouchableOpacity>
-            </View>
-
-           </View>
         )
     }
 }
@@ -184,4 +143,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default Post;
+export default User;
