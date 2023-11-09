@@ -4,7 +4,7 @@ import Home from '../screens/Home/Home';
 import PostForm from '../screens/PostForm/PostForm';
 import Comments from '../screens/Comments/Comments';
 import Search from '../screens/Search/Search';
-import Profile from '../screens/Profile/Profile';
+import Profile from '../screens/Perfil/Profile';
 
 const Tab = createBottomTabNavigator();
 
