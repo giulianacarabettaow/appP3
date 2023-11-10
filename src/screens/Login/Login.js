@@ -14,8 +14,6 @@ class Login extends Component{
         console.log(this.state)
     }
 
-    
-//no andan los setStates 
     login (email,pass){
         auth.signInWithEmailAndPassword(email,pass)
         .then(()=>{
