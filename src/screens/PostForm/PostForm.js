@@ -2,6 +2,7 @@ import react, { Component } from 'react';
 import { db, auth } from '../../firebase/config';
 import { TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { MyCamera } from '../../components/MyCamera';
 
 
 
@@ -34,7 +35,8 @@ class PostForm extends Component {
         return(
             <View>
              <View style={styles.formContainer}>
-                    <Text>POST FORM</Text>
+                    <Text>Nuevo post</Text>
+                    <MyCamera/>
                     <TextInput
                         style={styles.input}
                         onChangeText={(text)=>this.setState({Post: text})}
