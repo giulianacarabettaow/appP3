@@ -70,14 +70,11 @@ getUserPosts(user) {
 
 
 
-<<<<<<< HEAD
 componentDidMount() {
     this.getUserData()
     //desp poner el de posts 
   }
 
-=======
->>>>>>> 566cec9716533397e7997173855ca2e8c6d08667
 
   deleteAcc() {
     const email = auth.currentUser.email
@@ -108,35 +105,8 @@ componentDidMount() {
 render() {
   console.log(this.state)
   return ( 
-    {
-    this.state.loader ?
-      <ActivityIndicator styles={styles.activity} size='large' color='#5c0931' />
-      :
-      <View style={styles.container}>
-        <View style={styles.pageTitle}>
-          {this.state.userEmail === auth.currentUser.email ?
-            <View style={styles.outFunct}>
-              <TouchableOpacity onPress={() => this.setState({
-                input: true
-                })}>
-                <Entypo name="trash" size={30} color="white" />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => this.logOut()}><FontAwesome name="sign-out" size={30} color="white" /></TouchableOpacity>
-            </View>
-            :
-            false
-          }
-          {
-            this.state.input ?
-
-            <View>
-            <TextInput  keyboardType='default' placeholder='Put your password' secureTextEntry={true} onChangeText={text => this.setState({ password: text })} value={this.state.password} />
-            <TouchableOpacity onPress={() => this.deleteAcc()} >
-              <Text> Delete </Text>
-            </TouchableOpacity>
-          </View>
-          : false
-        }
+    
+          
 
       <View>
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.username}</Text>
