@@ -36,7 +36,9 @@ class PostForm extends Component {
             <View>
              <View style={styles.formContainer}>
                     <Text>Nuevo post</Text>
-                    <MyCamera/>
+
+                    {/* <MyCamera style={styles.camera}/> */}
+
                     <TextInput
                         style={styles.input}
                         onChangeText={(text)=>this.setState({Post: text})}
@@ -71,6 +73,9 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         marginVertical:10,
     },
+    // camera:{
+    //     height: 100%,
+    // },
     button:{
         backgroundColor:'#28a745',
         paddingHorizontal: 10,

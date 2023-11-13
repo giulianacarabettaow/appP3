@@ -38,16 +38,16 @@ class Home extends Component {
         console.log(this.state)
         return(
           <View>
-            { this.state.loader === true ? <ActivityIndicator  size='large' color='green'/>
+            { this.state.loader === true ? <ActivityIndicator  size='large' color='gray'/>
             :
-            <View >
+                <View style={styles.generalContainer}>
                 {console.log('estoy en home')}
-                <Text style={styles.input}>Nombre App</Text>
+                <Text style={styles.title}>Coffeegram</Text>
                 {/* <TouchableOpacity onPress={()=>this.logout()}>
                     <Text>Logout</Text>
                 </TouchableOpacity> */}
 
-                <Text>Últimos posts</Text>
+                <Text>Acá van los últimos posts pero desp saco el texto</Text> 
                 <FlatList 
                     data={this.state.postList}
                     keyExtractor={unPost => unPost.id.toString()}
@@ -61,9 +61,22 @@ class Home extends Component {
     }
 }
 const styles = StyleSheet.create({
+    generalContainer:{
+        backgroundColor: '#E0E0E0', //despues lo modifico estoy identificando partes
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+    },
     formContainer:{
         paddingHorizontal:10,
         marginTop: 20,
+    },
+    title:{
+         color: '#443742',
+         fontWeight: 'bold',
+         fontSize: 'bigger'
     },
     input:{
         height:20,
