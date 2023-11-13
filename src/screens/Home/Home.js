@@ -43,12 +43,8 @@ class Home extends Component {
                 <View style={styles.generalContainer}>
                 {console.log('estoy en home')}
                 <Text style={styles.title}>Coffeegram</Text>
-                {/* <TouchableOpacity onPress={()=>this.logout()}>
-                    <Text>Logout</Text>
-                </TouchableOpacity> */}
 
-                <Text>Acá van los últimos posts pero desp saco el texto</Text> 
-                <FlatList 
+                <FlatList style={styles.flatList}
                     data={this.state.postList}
                     keyExtractor={unPost => unPost.id.toString()}
                     renderItem={({item})=><Post propsNav={this.props} postInfo={item} />}
@@ -68,6 +64,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         flexWrap: 'wrap',
+        flexShrink: '0'
     },
     formContainer:{
         paddingHorizontal:10,
@@ -76,8 +73,10 @@ const styles = StyleSheet.create({
     title:{
          color: '#443742',
          fontWeight: 'bold',
-         fontSize: 'bigger'
+         fontSize: 40,
     },
+    // flatList:{
+    // },
     input:{
         height:20,
         paddingVertical:15,

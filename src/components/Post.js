@@ -1,7 +1,11 @@
 import react, { Component } from 'react';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
+// import { FontAwesome } from '@expo/vector-icons';
+// import { Ionicons } from '@expo/vector-icons';
+// import { Entypo } from '@expo/vector-icons';
 
 
 class Post extends Component {
@@ -121,54 +125,53 @@ class Post extends Component {
 
         return(
           
-           <View>
-            <Text>Datos del Post</Text>
-            <Text>{this.state.email}</Text>
-            <Text>{this.state.texto}</Text>
-            <Text>{this.state.userInfo[0]?.data.username}</Text>
-
-            <Text style={styles.input}># likes: {this.state.howManyLikes}</Text>
-            <Text style={styles.input}># Comentarios: {this.state.howManyComments}</Text>
-            
-
-            {this.state.myLike  ?  
-            <TouchableOpacity onPress={()=> this.dislike()}>
-              <Text> Dislike </Text>
-            </TouchableOpacity> 
-            
-            :
-            
-            <TouchableOpacity onPress={()=> this.like()}>
-              <Text> Like </Text>
-            </TouchableOpacity>
-            }
-            <View>
-                <TextInput
-                    style={styles.input}
-                    keyboardType='default'
-                    placeholder='Escribir comentario...'
-                    onChangeText={ text => this.setState({comment:text}) }                        
-                    value={this.state.comment}
-                    />
+           <View >
                 
-                <TouchableOpacity onPress={() => this.comment(this.state.comment)}>
-                    <Text style={styles.boton}>Comment</Text>
+                <Text>{this.state.email}</Text>
+                <Text>{this.state.texto}</Text>
+                <Text>{this.state.userInfo[0]?.data.username}</Text>
+
+                <Text style={styles.input} ># likes: {this.state.howManyLikes}</Text>
+                <Text style={styles.input}># Comentarios: {this.state.howManyComments}</Text>
+                
+
+                {this.state.myLike  ?  
+                <TouchableOpacity onPress={()=> this.dislike()} >
+                </TouchableOpacity> 
+                
+                :
+                
+                <TouchableOpacity onPress={()=> this.like()}>
+                <Text> Like </Text>
                 </TouchableOpacity>
-                {this.state.emptyComment != '' ? <Text>{this.state.emptyComment}</Text>: false}
-            </View>
-                {/* No anda la redireccion a Comments! */}
-            <View style={styles.input}>
-             <TouchableOpacity style={styles.button} onPress={()=>this.navegarComment()} >
-                    <Text> Leer comentarios... </Text>
-            </TouchableOpacity>
-            </View>
-            {
-             auth.currentUser.email === this.props.postInfo.data.owner ?
-                    <TouchableOpacity onPress={() => this.deletePost()}><Text>Borrar posteo</Text>
+                }
+                <View>
+                    <TextInput
+                        style={styles.input}
+                        keyboardType='default'
+                        placeholder='Escribir comentario...'
+                        onChangeText={ text => this.setState({comment:text}) }                        
+                        value={this.state.comment}
+                        />
+                    
+                    <TouchableOpacity onPress={() => this.comment(this.state.comment)}>
+                        <Text style={styles.boton}>Comment</Text>
                     </TouchableOpacity>
-                    :
-                false
-            }
+                    {this.state.emptyComment != '' ? <Text>{this.state.emptyComment}</Text>: false}
+                </View>
+                    {/* No anda la redireccion a Comments! */}
+                <View style={styles.input}>
+                <TouchableOpacity style={styles.button} onPress={()=>this.navegarComment()} >
+                        <Text> Leer comentarios... </Text>
+                </TouchableOpacity>
+                </View>
+                {
+                auth.currentUser.email === this.props.postInfo.data.owner ?
+                        <TouchableOpacity onPress={() => this.deletePost()}><Text>Borrar posteo</Text>
+                        </TouchableOpacity>
+                        :
+                    false
+                }
 
            </View>
         )

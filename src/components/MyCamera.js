@@ -45,4 +45,4 @@ class MyCamera extends Component {
 
 }
 
-export default MyCamera
+export default MyCamera;
