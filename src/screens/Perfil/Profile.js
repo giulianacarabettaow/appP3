@@ -27,7 +27,7 @@ getUserData(){
     } else {
       user = auth.currentUser.email
     }
-    db.collection("users").where("email", '==', user)
+    db.collection("user").where("email", '==', user)
     .onSnapshot((docs) => {
       let userInfo = [];
       docs.forEach((doc) => {
@@ -71,9 +71,9 @@ componentDidMount() {
 render() {
   return (
     <View>
-      <Text style={styles.texto}>{this.state.userInfo[0]?.data.userName}</Text>
-      <Text style={styles.texto}>{this.state.userInfo[0]?.data.biography}</Text>
-      <Text style={styles.texto}>{this.state.userInfo[0]?.data.email}</Text>
+      <Text style={styles.texto}>{this.state.userInfo[0]?.data.username}</Text>
+      {/* <Text style={styles.texto}>{this.state.userInfo[0]?.data.biography}</Text> */}
+      <Text style={styles.texto}>{this.state.userInfo[0]?.data.owner}</Text>
       <Text style={styles.texto}>Posts: {this.state.userPosts.length}</Text>
    //poner los styles y arreglar la obtencion de la info del usuario
       {this.state.userPosts.length !== 0 ? (

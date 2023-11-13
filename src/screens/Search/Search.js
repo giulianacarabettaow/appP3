@@ -53,7 +53,7 @@ class Search extends Component {
     }
 
     render(){
-        // console.log(this.state)
+         console.log(this.state)
         return(
           <View>
             <Text style={styles.formContainer}>Buscá usuarios...</Text>
@@ -68,7 +68,7 @@ class Search extends Component {
           <FlatList
                     data={this.state.usuariosFiltrados}
                     keyExtractor={user => user.id.toString()}
-                    renderItem={({ user }) =>  <User user={user.data} />  }
+                    renderItem={({ user }) =>  <User user={user} />  }
                 />
           </View>
 
