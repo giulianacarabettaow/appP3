@@ -104,11 +104,11 @@ class Post extends Component {
     }
 
     navegarComment(){
-        this.props.navigation.navigate('Comments', {id: this.props.postInfo.id, commentsData: this.props.postInfo.data.comments})
+        this.props.propsNav.navigation.navigate('Comments', {id: this.props.postInfo.id, commentsData: this.props.postInfo.data.comments})
     }
 
     render(){
-        console.log(this.state.myLike)
+        console.log(this.props.props)
         return(
           
            <View>
