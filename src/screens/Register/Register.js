@@ -1,6 +1,7 @@
 import react, { Component } from 'react';
 import { db, auth } from '../../firebase/config';
 import { TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 
 class Register extends Component {
     constructor(){

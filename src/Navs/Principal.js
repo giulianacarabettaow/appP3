@@ -2,6 +2,7 @@ import react, { Component } from 'react';
 import { StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { FontAwesome } from '@expo/vector-icons';
 
 import Login from '../screens/Login/Login';
 import Register from '../screens/Register/Register';

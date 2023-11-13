@@ -1,5 +1,6 @@
 import react, { Component } from 'react';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import { db, auth } from '../../firebase/config';
 
 
@@ -19,15 +20,19 @@ class Profile extends Component {
         input: false,
       }
     }
-        
-getUserData(){
-    let user = ''
-    if (this.props.route.params) {
-      user = this.props.route.params.user
-    } else {
-      user = auth.currentUser.email
-    }
-    db.collection("users").where("email", '==', user)
+    
+    componentDidMount() {
+        this.getUserData()
+      }
+    getUserData(){
+//     let user = ''
+
+//     if (this.props.route.params) {
+//       user = this.props.route.params.user
+//     } else {
+//       user = auth.currentUser.email
+//     }
+    db.collection("user").where("owner", '==', auth.currentUser.email)
     .onSnapshot((docs) => {
       let userInfo = [];
       docs.forEach((doc) => {
@@ -37,15 +42,22 @@ getUserData(){
       });
       this.setState({
         userInfo: userInfo,
-        userEmail: user,
+        // userEmail: user,
         loader: false
       });
-      this.getUserPosts(user)
+      this.getUserPosts(auth.currentUser.email)
     });
 }
 
+logout(){
+  auth.signOut();
+ //   Redirigir al usuario a la home del sitio.
+   this.props.navigation.navigate('Login')
+}
+
+
 getUserPosts(user) {
-    db.collection("posts").where("owner", '==', user).orderBy('createdAt', 'desc').onSnapshot((docs) => {
+    db.collection("posts").where("owner", '==', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot((docs) => {
       let userPosts = [];
       docs.forEach((doc) => {
         userPosts.push({
@@ -62,20 +74,18 @@ getUserPosts(user) {
 
 
 
-componentDidMount() {
-    this.getUserData()
-  }
-
 
 
 render() {
   return (
     <View>
-      <Text style={styles.texto}>{this.state.userInfo[0]?.data.userName}</Text>
-      <Text style={styles.texto}>{this.state.userInfo[0]?.data.biography}</Text>
-      <Text style={styles.texto}>{this.state.userInfo[0]?.data.email}</Text>
+      <Text style={styles.texto}>{this.state.userInfo[0]?.data.username}</Text>
+      <Text style={styles.texto}>{this.state.userInfo[0]?.data.owner}</Text>
       <Text style={styles.texto}>Posts: {this.state.userPosts.length}</Text>
-   //poner los styles y arreglar la obtencion de la info del usuario
+   {/* //poner los styles y arreglar la obtencion de la info del usuario */}
+      <TouchableOpacity onPress={()=>this.logout()}>
+          <Text>Logout</Text>
+      </TouchableOpacity>
       {this.state.userPosts.length !== 0 ? (
         <Text>No hay posteos</Text>
       ) : (
