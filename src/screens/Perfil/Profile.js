@@ -64,6 +64,7 @@ getUserPosts(user) {
 
 componentDidMount() {
     this.getUserData()
+    //desp poner el de posts 
   }
 
 
@@ -76,7 +77,7 @@ render() {
       {/* <Text style={styles.texto}>{this.state.userInfo[0]?.data.biography}</Text> */}
       <Text style={styles.texto}>{this.state.userInfo[0]?.data.owner}</Text>
       <Text style={styles.texto}>Posts: {this.state.userPosts.length}</Text>
-   //poner los styles y arreglar la obtencion de la info del usuario
+   
       {this.state.userPosts.length == 0 ? (
         <Text>No hay posteos</Text>
       ) : (
@@ -85,10 +86,8 @@ render() {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <Post
-              navigation={this.props.navigation}
-              id={item.id}
-              data={item.data}
-              url={item.url}
+              propsNav={this.props}
+              postInfo={item}
             />
           )}
         />
