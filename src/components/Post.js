@@ -108,7 +108,6 @@ class Post extends Component {
     }
 
     render(){
-        console.log(this.props.props)
         return(
           
            <View>
