@@ -2,9 +2,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { FontAwesome } from '@expo/vector-icons';
 import Home from '../screens/Home/Home';
 import PostForm from '../screens/PostForm/PostForm';
-import Comments from '../screens/Comments/Comments';
 import Search from '../screens/Search/Search';
 import Profile from '../screens/Perfil/Profile';
+import Comments from '../screens/Comments/Comments';
 
 const Tab = createBottomTabNavigator();
 

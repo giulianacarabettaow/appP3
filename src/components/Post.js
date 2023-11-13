@@ -102,8 +102,13 @@ class Post extends Component {
             this.setState({emptyComment: 'No puedes enviar un comentario vacío'})
         }
     }
+
+    navegarComment(){
+        this.props.propsNav.navigation.navigate('Comments', {id: this.props.postInfo.id, commentsData: this.props.postInfo.data.comments})
+    }
+
     render(){
-        console.log(this.state.myLike)
+        console.log(this.props.props)
         return(
           
            <View>
@@ -143,7 +148,7 @@ class Post extends Component {
             </View>
                 {/* No anda la redireccion a Comments! */}
             <View style={styles.input}>
-             <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Comments')} >
+             <TouchableOpacity style={styles.button} onPress={()=>this.navegarComment()} >
                     <Text> Leer comentarios... </Text>
             </TouchableOpacity>
             </View>

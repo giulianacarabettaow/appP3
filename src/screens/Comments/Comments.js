@@ -1,7 +1,7 @@
 import react, { Component } from 'react';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
 import firebase from 'firebase';
-// import { db, auth } from '../firebase/config';
+import { db, auth } from '../../firebase/config';
 
 
 class Comments extends Component {
@@ -12,12 +12,23 @@ class Comments extends Component {
         }
     }
 
+    componentDidMount() {
+        db.collection('posts')
+          .doc(this.props.route.params.id)
+          .onSnapshot(doc => {
+            this.setState({
+              data: doc.data(),
+              comentarios:doc.data().comments.sort((a, b) => a.createdAt - b.createdAt).reverse() //esto es para que los comentarios aparezcan de manera ascendente
+            }, () => console.log(this.state.data))
+          })
+      }
+    
    
     render(){
 
         return(
-          
-          <Text>toy en comments</Text>
+          <Text>Comentarios</Text>
+
         )
     }
 }

@@ -20,19 +20,15 @@ class Profile extends Component {
         input: false,
       }
     }
-    
-    componentDidMount() {
-        this.getUserData()
-      }
-    getUserData(){
-//     let user = ''
-
-//     if (this.props.route.params) {
-//       user = this.props.route.params.user
-//     } else {
-//       user = auth.currentUser.email
-//     }
-    db.collection("user").where("owner", '==', auth.currentUser.email)
+        
+getUserData(){
+    let user = ''
+    if (this.props.route.params) {
+      user = this.props.route.params.user
+    } else {
+      user = auth.currentUser.email
+    }
+    db.collection("user").where("owner", '==', user)
     .onSnapshot((docs) => {
       let userInfo = [];
       docs.forEach((doc) => {
@@ -77,16 +73,15 @@ getUserPosts(user) {
 
 
 render() {
+  console.log(this.state)
   return (
     <View>
       <Text style={styles.texto}>{this.state.userInfo[0]?.data.username}</Text>
+      {/* <Text style={styles.texto}>{this.state.userInfo[0]?.data.biography}</Text> */}
       <Text style={styles.texto}>{this.state.userInfo[0]?.data.owner}</Text>
       <Text style={styles.texto}>Posts: {this.state.userPosts.length}</Text>
-   {/* //poner los styles y arreglar la obtencion de la info del usuario */}
-      <TouchableOpacity onPress={()=>this.logout()}>
-          <Text>Logout</Text>
-      </TouchableOpacity>
-      {this.state.userPosts.length !== 0 ? (
+   //poner los styles y arreglar la obtencion de la info del usuario
+      {this.state.userPosts.length == 0 ? (
         <Text>No hay posteos</Text>
       ) : (
         <FlatList

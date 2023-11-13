@@ -8,6 +8,7 @@ import Login from '../screens/Login/Login';
 import Register from '../screens/Register/Register';
 import Menu from './Menu';
 import Comments from '../screens/Comments/Comments';
+import Post from '../components/Post';
 const Stack = createNativeStackNavigator();
 
 
