@@ -11,13 +11,19 @@ class User extends Component {
             
         }
     }
-
    
     render(){
+        console.log("props", this.props)
         return(
           
             <View > 
-            <Text> User</Text>
+            <Text>Resultado de busqueda</Text>
+
+            <View>
+            <Text>{this.props.user.data.username}</Text>
+            <Text>{this.props.user.data.owner}</Text>
+            </View>
+
             </View>
         )
     }

@@ -60,7 +60,7 @@ class Post extends Component {
         .then(() => {
             this.setState({
                 myLike: true,
-                howManyLikes: this.state.howManyLikes  })
+                howManyLikes: this.state.howManyLikes +1 })
             })
             .then(()=> console.log('likes',this.state.myLike))
             .catch(e => console.log(e))
@@ -73,7 +73,7 @@ class Post extends Component {
             .then(() => {
                 this.setState({
                     myLike: false,
-                    howManyLikes: this.state.howManyLikes 
+                    howManyLikes: this.state.howManyLikes -1
                 })
             })
             .then(()=> console.log('dislike',this.state.myLike))
@@ -108,6 +108,7 @@ class Post extends Component {
     }
 
     render(){
+        console.log(this.props.propsNav)
         return(
           
            <View>
@@ -116,8 +117,8 @@ class Post extends Component {
             <Text>{this.state.texto}</Text>
             <Text>{this.state.userInfo[0]?.data.username}</Text>
 
-            <Text style={styles.input}># likes: {this.state.howManyLikes.length}</Text>
-            <Text style={styles.input}># Comentarios: {this.state.howManyComments.length}</Text>
+            <Text style={styles.input}># likes: {this.state.howManyLikes}</Text>
+            <Text style={styles.input}># Comentarios: {this.state.howManyComments}</Text>
             
 
             {this.state.myLike  ?  

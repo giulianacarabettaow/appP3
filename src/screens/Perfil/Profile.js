@@ -79,6 +79,34 @@ componentDidMount() {
 
 
 render() {
+  console.log(this.state)
+  return ( 
+    
+          
+
+      <View>
+        <Text style={styles.texto}>{this.state.userInfo[0]?.data.username}</Text>
+        {/* <Text style={styles.texto}>{this.state.userInfo[0]?.data.biography}</Text> */}
+        <Text style={styles.texto}>{this.state.userInfo[0]?.data.owner}</Text>
+        <Text style={styles.texto}>Posts: {this.state.userPosts.length}</Text>
+    
+        {this.state.userPosts.length == 0 ? (
+          <Text>No hay posteos</Text>
+        ) : (
+          <FlatList
+            data={this.state.userPosts}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <Post
+                propsNav={this.props}
+                postInfo={item}
+              />
+            )}
+          />
+        )}
+        
+      </View>
+  );
   console.log(this.state.userPosts);
     return (
           <View> 

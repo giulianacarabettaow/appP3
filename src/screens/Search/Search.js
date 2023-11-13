@@ -34,27 +34,27 @@ class Search extends Component {
     }
 
     textEntry(event){
-        this.setState({ inputSearch: event.target.value })
+         this.setState({ inputSearch: event.target.value })
         if (event.target.value === '') {
             this.setState({ usuariosFiltrados: [] })
         }
         else {
-            let filteredUsers = this.state.usuarios?.filter((user) => user.data.username?.toLowerCase().includes(event.target.value));
+            let filteredUsers = this.state.usuarios?.filter((user) => user.data.username?.toLowerCase().includes(event.target.value.toLowerCase()));
             this.setState({ usuariosFiltrados: filteredUsers })
             if (filteredUsers.length === 0 ) {
                 this.setState({
-                    usersErr: true
+                    usersError: true
                 })
             } else {
                 this.setState({
-                    usersErr: false
+                    usersError: false
                 })
             }
         }
     }
 
     render(){
-         console.log(this.state)
+         console.log('filtrados:',this.state.usuariosFiltrados)
         return(
           <View>
             <Text style={styles.formContainer}>Buscá usuarios...</Text>
@@ -69,7 +69,7 @@ class Search extends Component {
           <FlatList
                     data={this.state.usuariosFiltrados}
                     keyExtractor={user => user.id.toString()}
-                    renderItem={({ user }) =>  <User user={user} />  }
+                    renderItem={({ item }) =>  <User user={item}   />  }
                 />
           </View>
 
