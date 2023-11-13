@@ -1,5 +1,6 @@
 import react, { Component } from 'react';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import { db, auth } from '../../firebase/config';
 
 
@@ -37,15 +38,22 @@ getUserData(){
       });
       this.setState({
         userInfo: userInfo,
-        userEmail: user,
+        // userEmail: user,
         loader: false
       });
-      this.getUserPosts(user)
+      this.getUserPosts(auth.currentUser.email)
     });
 }
 
+logout(){
+  auth.signOut();
+ //   Redirigir al usuario a la home del sitio.
+   this.props.navigation.navigate('Login')
+}
+
+
 getUserPosts(user) {
-    db.collection("posts").where("owner", '==', user).orderBy('createdAt', 'desc').onSnapshot((docs) => {
+    db.collection("posts").where("owner", '==', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot((docs) => {
       let userPosts = [];
       docs.forEach((doc) => {
         userPosts.push({
@@ -62,11 +70,14 @@ getUserPosts(user) {
 
 
 
+<<<<<<< HEAD
 componentDidMount() {
     this.getUserData()
     //desp poner el de posts 
   }
 
+=======
+>>>>>>> 566cec9716533397e7997173855ca2e8c6d08667
 
   deleteAcc() {
     const email = auth.currentUser.email

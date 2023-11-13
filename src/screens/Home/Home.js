@@ -1,4 +1,5 @@
 import react, { Component } from 'react';
+import { FontAwesome } from '@expo/vector-icons';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
 import { db, auth } from '../../firebase/config';
 import Post from '../../components/Post';
@@ -26,11 +27,11 @@ class Home extends Component {
     }
 
     // logut va en en el perfil
-     logout(){
-         auth.signOut();
-        //   Redirigir al usuario a la home del sitio.
-          this.props.navigation.navigate('Login')
-     }
+    //  logout(){
+    //      auth.signOut();
+    //     //   Redirigir al usuario a la home del sitio.
+    //       this.props.navigation.navigate('Login')
+    //  }
 
 
     render(){
@@ -39,14 +40,14 @@ class Home extends Component {
           <View>
             { this.state.loader === true ? <ActivityIndicator  size='large' color='green'/>
             :
-            <View>
+            <View >
                 {console.log('estoy en home')}
-                <Text style={styles.input}>HOME</Text>
-                <TouchableOpacity onPress={()=>this.logout()}>
+                <Text style={styles.input}>Nombre App</Text>
+                {/* <TouchableOpacity onPress={()=>this.logout()}>
                     <Text>Logout</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
-                <Text>Lista de posts</Text>
+                <Text>Últimos posts</Text>
                 <FlatList 
                     data={this.state.postList}
                     keyExtractor={unPost => unPost.id.toString()}
