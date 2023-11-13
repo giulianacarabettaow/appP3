@@ -82,6 +82,9 @@ render() {
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.username}</Text>
         {/* <Text style={styles.texto}>{this.state.userInfo[0]?.data.biography}</Text> */}
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.owner}</Text>
+        <TouchableOpacity onPress={()=>this.logout()}>
+                    <Text>Logout</Text>
+        </TouchableOpacity>
         <Text style={styles.texto}>Posts: {this.state.userPosts.length}</Text>
     
         {this.state.userPosts.length == 0 ? (

@@ -27,11 +27,11 @@ class Home extends Component {
     }
 
     // logut va en en el perfil
-     logout(){
-         auth.signOut();
-        //   Redirigir al usuario a la home del sitio.
-          this.props.navigation.navigate('Login')
-     }
+    //  logout(){
+    //      auth.signOut();
+    //     //   Redirigir al usuario a la home del sitio.
+    //       this.props.navigation.navigate('Login')
+    //  }
 
 
     render(){
@@ -43,9 +43,9 @@ class Home extends Component {
             <View >
                 {console.log('estoy en home')}
                 <Text style={styles.input}>Nombre App</Text>
-                <TouchableOpacity onPress={()=>this.logout()}>
+                {/* <TouchableOpacity onPress={()=>this.logout()}>
                     <Text>Logout</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
                 <Text>Últimos posts</Text>
                 <FlatList 
