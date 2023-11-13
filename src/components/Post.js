@@ -60,7 +60,7 @@ class Post extends Component {
         .then(() => {
             this.setState({
                 myLike: true,
-                howManyLikes: this.state.howManyLikes  })
+                howManyLikes: this.state.howManyLikes +1 })
             })
             .then(()=> console.log('likes',this.state.myLike))
             .catch(e => console.log(e))
@@ -73,7 +73,7 @@ class Post extends Component {
             .then(() => {
                 this.setState({
                     myLike: false,
-                    howManyLikes: this.state.howManyLikes 
+                    howManyLikes: this.state.howManyLikes -1
                 })
             })
             .then(()=> console.log('dislike',this.state.myLike))
@@ -107,8 +107,18 @@ class Post extends Component {
         this.props.propsNav.navigation.navigate('Comments', {id: this.props.postInfo.id, commentsData: this.props.postInfo.data.comments})
     }
 
+    deletePost() {
+        if (confirm('Borrar posteo') === true){
+            db.collection('posts').doc(this.props.postInfo.id).delete()
+        } else {
+            false
+        }
+    }
+
     render(){
-        console.log(this.props.props)
+        console.log(this.props)
+        console.log('id',this.props.postInfo.id)
+
         return(
           
            <View>
@@ -117,19 +127,19 @@ class Post extends Component {
             <Text>{this.state.texto}</Text>
             <Text>{this.state.userInfo[0]?.data.username}</Text>
 
-            <Text style={styles.input}># likes: {this.state.howManyLikes.length}</Text>
-            <Text style={styles.input}># Comentarios: {this.state.howManyComments.length}</Text>
+            <Text style={styles.input}># likes: {this.state.howManyLikes}</Text>
+            <Text style={styles.input}># Comentarios: {this.state.howManyComments}</Text>
             
 
             {this.state.myLike  ?  
             <TouchableOpacity onPress={()=> this.dislike()}>
-                Dislike
+              <Text> Dislike </Text>
             </TouchableOpacity> 
             
             :
             
             <TouchableOpacity onPress={()=> this.like()}>
-                Like
+              <Text> Like </Text>
             </TouchableOpacity>
             }
             <View>
@@ -152,6 +162,13 @@ class Post extends Component {
                     <Text> Leer comentarios... </Text>
             </TouchableOpacity>
             </View>
+            {
+             auth.currentUser.email === this.props.postInfo.data.owner ?
+                    <TouchableOpacity onPress={() => this.deletePost()}><Text>Borrar posteo</Text>
+                    </TouchableOpacity>
+                    :
+                false
+            }
 
            </View>
         )
