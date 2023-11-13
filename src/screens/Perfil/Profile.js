@@ -52,7 +52,7 @@ logout(){
 }
 
 
-getUserPosts(user) {
+getUserPosts() {
     db.collection("posts").where("owner", '==', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot((docs) => {
       let userPosts = [];
       docs.forEach((doc) => {
@@ -68,22 +68,16 @@ getUserPosts(user) {
     });
   }
 
-
-
 componentDidMount() {
     this.getUserData()
-    //desp poner el de posts 
-  }
-
-
-
+    this.getUserPosts()
+console.log(this.props) 
+ }
 
 render() {
   console.log(this.state)
   return ( 
     
-          
-
       <View>
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.username}</Text>
         {/* <Text style={styles.texto}>{this.state.userInfo[0]?.data.biography}</Text> */}
@@ -106,32 +100,7 @@ render() {
         )}
         
       </View>
-  );
-  console.log(this.state.userPosts);
-    return (
-          <View> 
-                <View> 
-               
-                <Text >{this.state.userInfo[0]?.data.username}</Text>
-                <Text >{this.state.userInfo[0]?.data.owner}</Text>
-                <Text >Posts: {this.state.userPosts.length}</Text>
-              </View>
-              {this.state.userPosts.length !== 0 ?
-                <FlatList
-                  data={this.state.userPosts}
-                  keyExtractor={(item) => item.id}
-                  renderItem={({ item }) => <Post
-                    propsNav={this.props}
-                    postInfo={item} />
-                  } />
-                :
-                <View >
-                  <Text >Subi algo flaco</Text>
-                </View>
-              }
-            </View>
-    )
-  }
+  )}
 }
 
 const styles = StyleSheet.create({

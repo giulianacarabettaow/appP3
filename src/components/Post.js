@@ -107,8 +107,18 @@ class Post extends Component {
         this.props.propsNav.navigation.navigate('Comments', {id: this.props.postInfo.id, commentsData: this.props.postInfo.data.comments})
     }
 
+    deletePost() {
+        if (confirm('Borrar posteo') === true){
+            db.collection('posts').doc(this.props.postInfo.id).delete()
+        } else {
+            false
+        }
+    }
+
     render(){
-        console.log(this.props.propsNav)
+        console.log(this.props)
+        console.log('id',this.props.postInfo.id)
+
         return(
           
            <View>
@@ -123,13 +133,13 @@ class Post extends Component {
 
             {this.state.myLike  ?  
             <TouchableOpacity onPress={()=> this.dislike()}>
-                Dislike
+              <Text> Dislike </Text>
             </TouchableOpacity> 
             
             :
             
             <TouchableOpacity onPress={()=> this.like()}>
-                Like
+              <Text> Like </Text>
             </TouchableOpacity>
             }
             <View>
@@ -152,6 +162,13 @@ class Post extends Component {
                     <Text> Leer comentarios... </Text>
             </TouchableOpacity>
             </View>
+            {
+             auth.currentUser.email === this.props.postInfo.data.owner ?
+                    <TouchableOpacity onPress={() => this.deletePost()}><Text>Borrar posteo</Text>
+                    </TouchableOpacity>
+                    :
+                false
+            }
 
            </View>
         )

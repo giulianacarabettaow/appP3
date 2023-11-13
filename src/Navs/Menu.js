@@ -16,7 +16,7 @@ function Menu (){
             
             <Tab.Screen name='PostForm' component={PostForm} options={{tabBarIcon: () => <FontAwesome name="plus" size={24} color="#5c0931" /> ,headerShown: false}}/>
 
-            <Tab.Screen name='Comments' component={Comments} options={{tabBarIcon: () => <FontAwesome name="comment" size={24} color="#5c0931" /> ,headerShown: false}}/>
+            {/* <Tab.Screen name='Comments' component={Comments} options={{tabBarIcon: () => <FontAwesome name="comment" size={24} color="#5c0931" /> ,headerShown: false}}/> */}
 
             <Tab.Screen name='Search' component={Search} options={{tabBarIcon: () => <FontAwesome name="searchengin" size={24} color="#5c0931" /> ,headerShown: false}}/>
 
