@@ -76,31 +76,7 @@ componentDidMount() {
   }
 
 
-  deleteAcc() {
-    const email = auth.currentUser.email
-    const password = this.state.password
-    const credential = firebase.auth.EmailAuthProvider.credential(email, password);
 
-    if (confirm('Estas seguro?') == true) {
-      auth.currentUser.reauthenticateWithCredential(credential)
-        .then(() => {
-          auth.currentUser.delete()
-        })
-        .catch((error) => {
-          console.log(error)
-          this.setState({
-            error: true
-          })
-        });
-        db.collection("user").doc(this.state.userInfo[0].id).delete()
-        this.state.userPosts.forEach((element)=> {
-        db.collection("posts").doc(element.id).delete()
-        this.props.navigation.navigate('Login')
-      })
-    } else {
-      false
-    }
-  }
 
 render() {
   console.log(this.state)
@@ -131,6 +107,30 @@ render() {
         
       </View>
   );
+  console.log(this.state.userPosts);
+    return (
+          <View> 
+                <View> 
+               
+                <Text >{this.state.userInfo[0]?.data.username}</Text>
+                <Text >{this.state.userInfo[0]?.data.owner}</Text>
+                <Text >Posts: {this.state.userPosts.length}</Text>
+              </View>
+              {this.state.userPosts.length !== 0 ?
+                <FlatList
+                  data={this.state.userPosts}
+                  keyExtractor={(item) => item.id}
+                  renderItem={({ item }) => <Post
+                    propsNav={this.props}
+                    postInfo={item} />
+                  } />
+                :
+                <View >
+                  <Text >Subi algo flaco</Text>
+                </View>
+              }
+            </View>
+    )
   }
 }
 
