@@ -4,7 +4,6 @@ import Home from '../screens/Home/Home';
 import PostForm from '../screens/PostForm/PostForm';
 import Search from '../screens/Search/Search';
 import Profile from '../screens/Perfil/Profile';
-import Comments from '../screens/Comments/Comments';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,8 +14,6 @@ function Menu (){
             <Tab.Screen name='Home' component={Home}  options={{tabBarIcon: () => <FontAwesome name="home" size={24} color="#5c0931" /> ,headerShown: false}}/>
             
             <Tab.Screen name='PostForm' component={PostForm} options={{tabBarIcon: () => <FontAwesome name="plus" size={24} color="#5c0931" /> ,headerShown: false}}/>
-
-            {/* <Tab.Screen name='Comments' component={Comments} options={{tabBarIcon: () => <FontAwesome name="comment" size={24} color="#5c0931" /> ,headerShown: false}}/> */}
 
             <Tab.Screen name='Search' component={Search} options={{tabBarIcon: () => <FontAwesome name="searchengin" size={24} color="#5c0931" /> ,headerShown: false}}/>
 
