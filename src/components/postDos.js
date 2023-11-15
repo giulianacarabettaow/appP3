@@ -20,7 +20,8 @@ class PostDos extends Component {
             comment: '',
             userInfo:[],
             userLoggedInfo:[], 
-            emptyComment:''
+            emptyComment:'',
+            comentarios:[]
         },console.log(this.state)
     }
     
@@ -56,6 +57,13 @@ class PostDos extends Component {
             userLoguedInfo: userLoguedInfo,
             });
         });       
+        db.collection('posts')
+          .doc(this.props.postInfo.id)
+          .onSnapshot(doc => {
+            this.setState({
+              comentarios:doc.data().comments
+            }, () => console.log(this.state.comentarios))
+          })
     }
 
     like(){
@@ -160,6 +168,18 @@ class PostDos extends Component {
                         <Text style={styles.boton}>Comment</Text>
                     </TouchableOpacity>
                     {this.state.emptyComment != '' ? <Text>{this.state.emptyComment}</Text>: false}
+                
+                    <FlatList
+                        data={this.state.comentarios.sort((a, b) => b.createdAt - a.createdAt).slice(0,4)}
+                        keyExtractor={( item ) => item.createdAt.toString()}
+                        renderItem={({item}) => 
+                      <View >
+                        <TouchableOpacity onPress={()=> this.props.navigation.navigate('Profile', {user:item.email})} >
+                        <Text>{item.ownerUsername}</Text>
+                        </TouchableOpacity>
+                        <Text>{item.texto}</Text>
+                      </View>} 
+              />                  
                 </View>
                     {/* No anda la redireccion a Comments! */}
                 <View style={styles.input}>

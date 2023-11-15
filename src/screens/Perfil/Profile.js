@@ -76,12 +76,15 @@ render() {
   console.log(this.state),
   console.log('props',this.props)
   return ( 
-    
+  <React.Fragment>
+    {this.state.loader ?
+        <ActivityIndicator styles={styles.activity} size='large' color='#5c0931' />
+        :
       <View>
-
-
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.username}</Text>
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.owner}</Text>
+        <Text style={styles.texto}>{this.state.userInfo[0]?.data.bio}</Text>
+
         <TouchableOpacity onPress={()=>this.logout()}>
                     <Text>Logout</Text>
         </TouchableOpacity>
@@ -103,6 +106,8 @@ render() {
         )}
         
       </View>
+       }
+</React.Fragment>
   )}
 }
 
@@ -177,7 +182,5 @@ const styles = StyleSheet.create({
   justifyContent: 'flex-end'
   }
 })
-
-
 
 export default Profile

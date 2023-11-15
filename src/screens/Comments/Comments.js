@@ -63,6 +63,10 @@ class Comments extends Component {
         }
     }
     
+    backToHome(){
+      this.props.navigation.navigate('Home')
+    }
+
     render(){
     console.log(this.state.comentarios)
         return(
@@ -94,6 +98,9 @@ class Comments extends Component {
                 <Text style={styles.boton}>Comment</Text>
             </TouchableOpacity>
             {this.state.emptyComment != '' ? <Text>{this.state.emptyComment}</Text>: false}
+
+            <TouchableOpacity onPress={()=> this.backToHome()}><Text>Volver a home</Text></TouchableOpacity>
+
         </View>
         </React.Fragment>
         )
