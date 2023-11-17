@@ -3,6 +3,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
 import { db, auth } from '../../firebase/config';
 import Post from '../../components/Post';
+import PostDos from '../../components/postDos'
 
 class Home extends Component {
     constructor(){
@@ -35,7 +36,7 @@ class Home extends Component {
 
 
     render(){
-        console.log(this.state)
+        console.log('current user;',auth.currentUser)
         return(
           <View>
             { this.state.loader === true ? <ActivityIndicator  size='large' color='gray'/>
@@ -44,10 +45,11 @@ class Home extends Component {
                 {console.log('estoy en home')}
                 <Text style={styles.title}>Coffeegram</Text>
 
-                <FlatList style={styles.flatList}
+                <FlatList
                     data={this.state.postList}
                     keyExtractor={unPost => unPost.id.toString()}
-                    renderItem={({item})=><Post propsNav={this.props} postInfo={item} />}
+                    renderItem={({item})=><PostDos propsNav={this.props} postInfo={item} />}
+                    // thispropsnavigation
                 />
             
                 </View>

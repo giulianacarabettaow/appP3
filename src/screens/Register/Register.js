@@ -30,7 +30,8 @@ class Register extends Component {
     .then(()=>(db.collection('user').add({
             owner: auth.currentUser.email,
             username: username,
-            createdAt: Date.now()
+            createdAt: Date.now(),
+            bio: this.state.bio
         })
         ))
 
@@ -94,7 +95,7 @@ class Register extends Component {
                     {
                     this.state.password === '' || this.state.email === '' ||  this.state.username === '' ?
                             <View style={styles.input}>
-                                    <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password,this.state.username)}>
+                                    <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password,this.state.username, this.state.bio)}>
                                         <Text> Enviar </Text>
                                     </TouchableOpacity>
                                     {this.state.errorMessage !== ''? <Text >Completa todos los campos obligatorios</Text> : false}

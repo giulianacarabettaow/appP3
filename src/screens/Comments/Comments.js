@@ -2,6 +2,7 @@ import react, { Component } from 'react';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
 import firebase from 'firebase';
 import { db, auth } from '../../firebase/config';
+import React from 'react';
 
 
 class Comments extends Component {
@@ -9,98 +10,99 @@ class Comments extends Component {
         super(props)
         this.state={
         comentarios:[],
+        userLoggedInfo:[], 
         comment:'',
+        emptyComment:''
         }
     }
 
     componentDidMount() {
+
         db.collection('posts')
           .doc(this.props.route.params.id)
           .onSnapshot(doc => {
             this.setState({
-              data: doc.data(),
-              comentarios:doc.data().comments.sort((a, b) => a.createdAt - b.createdAt).reverse() //esto es para que los comentarios aparezcan de manera ascendente
-            }, () => console.log(this.state.data))
+              comentarios:doc.data().comments
+            }, () => console.log(this.state.comentarios))
           })
 
-          db.collection("users").where("email", '==', auth.currentUser.email).onSnapshot((docs) => {
-            let userLoguedInfo = [];
-            docs.forEach((doc) => {
-              userLoguedInfo.push({
-                data: doc.data()
-              })
-            });
-            this.setState({
-              userLoguedInfo: userLoguedInfo,
-            });
+          // Lo usamos para traer el nombre de usuario logueado. Para que aparezca el nombre del usuario que hizo el comentario, en el obj lit del comentario dentro del documento del post
+        db.collection("user").where("owner", '==', auth.currentUser.email).onSnapshot((docs) => {
+          let userLoguedInfo = [];
+          docs.forEach((doc) => {
+          userLoguedInfo.push({
+              data: doc.data()
+          })
           });
+          this.setState({
+          userLoguedInfo: userLoguedInfo,
+          });
+      });       
       }
 
-      comment(comentario) {
-        const commentAGuardar = {
-          ownerUsername: this.state.userLoguedInfo[0]?.data.userName,
-          ownerEmail: auth.currentUser.email,
-          createdAt: Date.now(),
-          description: comentario
+      comment(comment){
+        if (comment !== ''){
+            const commentToSave = {
+              ownerUsername: this.state.userLoguedInfo[0]?.data.username,
+              email: auth.currentUser.email,
+              createdAt: Date.now(),
+              texto: comment
+            }
+            db.collection('posts').doc(this.props.route.params.id).update({
+                comments: firebase.firestore.FieldValue.arrayUnion(commentToSave)
+            })
+            .then(() => {
+                  this.setState({
+                  comment: '',
+              });
+            })
+            .then(()=> console.log('andan los comentarios',this.state.comment))
+          .catch(e => console.log(e))
+        }else{
+            this.setState({emptyComment: 'No puedes enviar un comentario vacío'})
         }
+    }
     
-        db.collection('posts').doc(this.props.route.params.id).update({
-          comments: firebase.firestore.FieldValue.arrayUnion(commentAGuardar)
-        })
-          .then(() => {
-            this.setState({
-              comment: '',
-              commentCount: this.state.commentCount + 1
-            });
-          })
-          
-      }
-    
-      
-    render(){
+    backToHome(){
+      this.props.navigation.navigate('Home')
+    }
 
+    render(){
+    console.log(this.state.comentarios)
         return(
+          <React.Fragment>
             <View >
-            <View >
-              {this.state.commentCount == 0 ? 
-                  <Text>No comments yet...</Text>
-                : <>
-                  <Text >
-                    {this.state.commentCount} 
-                  </Text>
-                  <FlatList
-                        style={styles.flat}
-                        data={this.state.comentarios.sort((a, b) => b.createdAt - a.createdAt)}
-                        keyExtractor={( item ) => item.createdAt.toString()}
-                        renderItem={({item}) => 
-                                    <>
-                                        <View >
-                                            <TouchableOpacity  onPress={() => this.props.navigation.navigate('Go Back', {user: item.ownerEmail})}>
-                                                <Text >{item.ownerUsername}: </Text>
-                                            </TouchableOpacity> 
-                                            <Text >{item.description}</Text>
-                                        </View>
-                                    </>                  
-                                }/> 
-                </>
-              }
-              <View >
-                  <TextInput
-                   
-                    keyboardType='default'
-                    placeholder='Your comment!'
-                    onChangeText={ text => this.setState({comment:text}) }
-                    value={this.state.comment} />
-                  <TouchableOpacity onPress={() => this.comment(this.state.comment)}>
-                    <Text >
-                      Up Load
-                    </Text>
-                  </TouchableOpacity>
-              </View>
-    
-    
+              <Text>comentarios</Text>
+              <FlatList
+                  data={this.state.comentarios.sort((a, b) => b.createdAt - a.createdAt)}
+                  keyExtractor={( item ) => item.createdAt.toString()}
+                  renderItem={({item}) => 
+                      <View >
+                        <TouchableOpacity onPress={()=> this.props.navigation.navigate('Profile', {user:item.email})} >
+                        <Text>{item.ownerUsername}</Text>
+                        </TouchableOpacity>
+                        <Text>{item.texto}</Text>
+                      </View>} 
+              />                  
             </View>
-          </View>
+            <View>
+            <TextInput
+                style={styles.input}
+                keyboardType='default'
+                placeholder='Escribir comentario...'
+                onChangeText={ text => this.setState({comment:text}) }                        
+                value={this.state.comment}
+                />
+            
+            <TouchableOpacity onPress={() => this.comment(this.state.comment)}>
+                <Text style={styles.boton}>Comment</Text>
+            </TouchableOpacity>
+            {this.state.emptyComment != '' ? <Text>{this.state.emptyComment}</Text>: false}
+
+            <TouchableOpacity onPress={()=> this.backToHome()}><Text>Volver a home</Text></TouchableOpacity>
+
+        </View>
+        </React.Fragment>
         )
       }
     

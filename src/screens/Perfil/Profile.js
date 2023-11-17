@@ -38,22 +38,15 @@ getUserData(){
       });
       this.setState({
         userInfo: userInfo,
-        // userEmail: user,
+        userEmail: user,
         loader: false
       });
-      this.getUserPosts(auth.currentUser.email)
+      this.getUserPosts(user)
     });
 }
 
-logout(){
-  auth.signOut();
- //   Redirigir al usuario a la home del sitio.
-   this.props.navigation.navigate('Login')
-}
-
-
-getUserPosts() {
-    db.collection("posts").where("owner", '==', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot((docs) => {
+getUserPosts(user) {
+    db.collection("posts").where("owner", '==', user).orderBy('createdAt', 'desc').onSnapshot((docs) => {
       let userPosts = [];
       docs.forEach((doc) => {
         userPosts.push({
@@ -68,20 +61,30 @@ getUserPosts() {
     });
   }
 
+  logout(){
+    auth.signOut();
+   //   Redirigir al usuario a la home del sitio.
+     this.props.navigation.navigate('Login')
+  }
+  
+
 componentDidMount() {
     this.getUserData()
-    this.getUserPosts()
-console.log(this.props) 
  }
 
 render() {
-  console.log(this.state)
+  console.log(this.state),
+  console.log('props',this.props)
   return ( 
-    
+  <React.Fragment>
+    {this.state.loader ?
+        <ActivityIndicator styles={styles.activity} size='large' color='#5c0931' />
+        :
       <View>
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.username}</Text>
-        {/* <Text style={styles.texto}>{this.state.userInfo[0]?.data.biography}</Text> */}
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.owner}</Text>
+        <Text style={styles.texto}>{this.state.userInfo[0]?.data.bio}</Text>
+
         <TouchableOpacity onPress={()=>this.logout()}>
                     <Text>Logout</Text>
         </TouchableOpacity>
@@ -103,6 +106,8 @@ render() {
         )}
         
       </View>
+       }
+</React.Fragment>
   )}
 }
 
@@ -177,7 +182,5 @@ const styles = StyleSheet.create({
   justifyContent: 'flex-end'
   }
 })
-
-
 
 export default Profile

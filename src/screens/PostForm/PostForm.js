@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         marginVertical:10,
     },
     // camera:{
-    //     height: 100%,
+    //     height: 100
     // },
     button:{
         backgroundColor:'#846C5B',

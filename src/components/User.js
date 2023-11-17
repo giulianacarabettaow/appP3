@@ -22,6 +22,7 @@ class User extends Component {
             <View>
             <Text>{this.props.user.data.username}</Text>
             <Text>{this.props.user.data.owner}</Text>
+            <Text>{this.props.user.data.bio}</Text>
             </View>
 
             </View>
