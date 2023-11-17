@@ -58,7 +58,6 @@ class Home extends Component {
 }
 const styles = StyleSheet.create({
     generalContainer:{
-        backgroundColor: '#E0E0E0', //despues lo modifico estoy identificando partes
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
