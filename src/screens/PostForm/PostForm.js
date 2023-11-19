@@ -36,8 +36,7 @@ class PostForm extends Component {
             <View>
              <View style={styles.formContainer}>
                     <Text>Crea una nueva publicación</Text>
-
-                     {/* <MyCamera style={styles.camera}/> */}
+                    <MyCamera style={styles.camera}/>
                     {/*Acá iria el campo de la foto y el preview etc */}
                     <TextInput
                         style={styles.input}
@@ -74,9 +73,9 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginVertical:10,
     },
-    // camera:{
-    //     height: 100
-    // },
+    camera:{
+        height: 100
+    },
     button:{
         backgroundColor:'#846C5B',
         padding: 10,

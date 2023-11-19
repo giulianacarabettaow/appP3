@@ -111,6 +111,8 @@ class Comments extends Component {
 
 const styles = StyleSheet.create({
     formContainer:{
+        flex:1,
+        alignItems:'center',
         paddingHorizontal:10,
         marginTop: 20,
     },
