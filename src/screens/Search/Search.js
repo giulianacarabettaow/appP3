@@ -56,7 +56,7 @@ class Search extends Component {
     render(){
          console.log('filtrados:',this.state.usuariosFiltrados)
         return(
-          <View>
+          <View style={styles.background}>
             <Text style={styles.formContainer}>Buscá usuarios...</Text>
           <TextInput style={styles.input}
               keyboardType='default'
@@ -77,9 +77,14 @@ class Search extends Component {
     }
 }
 const styles = StyleSheet.create({
+    background:{
+        backgroundColor: '#E0E0E0'
+    },
     formContainer:{
         paddingHorizontal:10,
         marginTop: 20,
+        fontSize: 20,
+        fontWeight: 'bold',
     },
     input:{
         height:20,
@@ -88,7 +93,7 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderColor: '#ccc',
         borderStyle: 'solid',
-        borderRadius: 6,
+        borderRadius: 10,
         marginVertical:10,
     },
     button:{

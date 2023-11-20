@@ -17,7 +17,7 @@ class User extends Component {
         return(
           
             <View > 
-            <Text>Resultado de busqueda</Text>
+            <Text style={styles.resultados}>Resultado de busqueda</Text>
 
             <View>
             <TouchableOpacity onPress={()=> this.props.propsNav.navigation.navigate('notMeProfile', {user:this.props.user.data.owner})} style={styles.commentBox.commentOwner}>
@@ -35,6 +35,10 @@ const styles = StyleSheet.create({
     formContainer:{
         paddingHorizontal:10,
         marginTop: 20,
+    },
+    resultados:{
+        fontSize: 20,
+        fontWeight: 'bold',
     },
     input:{
         height:20,
@@ -68,7 +72,7 @@ const styles = StyleSheet.create({
             width: 'auto',
             textAlign: 'start',
             owner: {
-                fontWeight: 550,
+                fontWeight: 'bold',
                 fontSize: 15
             }
         },

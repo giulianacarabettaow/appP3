@@ -47,10 +47,10 @@ class MyCamera extends Component {
 
 }
     // const styles= StyleSheet.create({
-    //     camera:{
-    //         display: 'flex',
-    //         height:20,
-    //     }
-    // })
+    //      camera:{
+    //          display: 'flex',
+    //          height:50,
+    //      }
+    //  })
 
 export default MyCamera;

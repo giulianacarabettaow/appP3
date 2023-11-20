@@ -50,7 +50,7 @@ class Home extends Component {
                 <FlatList
                     data={this.state.postList}
                     keyExtractor={unPost => unPost.id.toString()}
-                    renderItem={({item})=><PostDos propsNav={this.props} postInfo={item} />}
+                    renderItem={({item})=><PostDos propsNav={this.props} postInfo={item} style={styles.element} />}
                     // thispropsnavigation
                 />
             
@@ -71,10 +71,6 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         flexShrink: '0'
     },
-    formContainer:{
-        paddingHorizontal:10,
-        marginTop: 20,
-    },
     title:{
          color: '#443742',
          fontWeight: 'bold',
@@ -82,6 +78,13 @@ const styles = StyleSheet.create({
     },
     // flatList:{
     // },
+    element:{
+        display:'flex',
+        flexDirection:'column',
+        margin: 30,
+        padding: 30,
+        justifyContent: 'space-around',
+    },
     input:{
         height:20,
         paddingVertical:15,
