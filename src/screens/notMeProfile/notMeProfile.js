@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { db, auth } from '../../firebase/config';
 
 
-import Post from '../../components/Post';
+import Post from '../../components/postDos';
 import React from 'react';
 
 class notMeProfile extends Component {
