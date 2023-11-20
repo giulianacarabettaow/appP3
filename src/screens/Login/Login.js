@@ -33,7 +33,7 @@ class Login extends Component{
         return(
             <View>
             <View style={styles.formContainer}>
-            <Text>Login</Text>
+            <Text style={styles.tituloPagina}>Login</Text>
             <TextInput
                 style={styles.input}
                 onChangeText={(text)=>this.setState({email: text})}
@@ -56,13 +56,13 @@ class Login extends Component{
                 this.state.password === '' || this.state.email === '' ?
                 <View style={styles.input}>
                     <TouchableOpacity style={styles.button} onPress={() => this.login(this.state.email, this.state.password)} >
-                        <Text > Enviar </Text>
+                        <Text style={styles.button} > Enviar </Text>
                     </TouchableOpacity>
                     {this.state.errorMessage !== ''? <Text >Completa ambos campos</Text> : ''}
                 </View>
                 :
                 <View style={styles.input}>
-                    <TouchableOpacity onPress={() => this.login(this.state.email, this.state.password)} >
+                    <TouchableOpacity style={styles.button} onPress={() => this.login(this.state.email, this.state.password)} >
                         <Text> Enviar </Text>
                     </TouchableOpacity>
                     {this.state.errorMessage !== ''? <Text style={styles.input}>{this.state.errorMessage}</Text> : ''}
@@ -76,7 +76,7 @@ class Login extends Component{
 
             <View style={styles.input}>
              <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Register')} >
-                    <Text> No tengo cuenta. Ir a registrarme </Text>
+                    <Text style={styles.button}> No tengo cuenta. Ir a registrarme </Text>
             </TouchableOpacity>
             </View>
 
@@ -92,6 +92,9 @@ const styles = StyleSheet.create({
         paddingHorizontal:10,
         marginTop: 20,
     },
+    tituloPagina:{
+        fontWeight: 'bold'
+    },
     input:{
         height:20,
         paddingVertical:15,
@@ -103,17 +106,21 @@ const styles = StyleSheet.create({
         marginVertical:10,
     },
     button:{
-        backgroundColor:'#28a745',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
+        backgroundColor:'#846C5B',
+        // padding: 10,
         textAlign: 'center',
-        borderRadius:4,
+        height:25,
         borderWidth:1,
+        borderRadius: 15,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#443742',
+        display: 'flex',
     },
     textButton:{
-        color: '#fff'
+        color: '#E0E0E',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
     }
 })
 

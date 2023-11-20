@@ -52,7 +52,7 @@ class Register extends Component {
 
                 <View>
                     <View style={styles.formContainer}>
-                    <Text>Register</Text>
+                    <Text style={styles.tituloPagina}>Register</Text>
                     <TextInput
                         style={styles.input}
                         onChangeText={(text)=>this.setState({email: text})}
@@ -132,6 +132,9 @@ const styles = StyleSheet.create({
         paddingHorizontal:10,
         marginTop: 20,
     },
+    tituloPagina:{
+        fontWeight: 'bold'
+    },
     input:{
         height:20,
         paddingVertical:15,
@@ -143,14 +146,15 @@ const styles = StyleSheet.create({
         marginVertical:10,
     },
     button:{
-        backgroundColor:'#28a745',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
+        backgroundColor:'#846C5B',
+        // padding: 10,
         textAlign: 'center',
-        borderRadius:4,
+        height:25,
         borderWidth:1,
+        borderRadius: 15,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#443742',
+        display: 'flex',
     },
     textButton:{
         color: '#fff'

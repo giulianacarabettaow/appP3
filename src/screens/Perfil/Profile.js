@@ -80,18 +80,18 @@ render() {
     {this.state.loader ?
         <ActivityIndicator styles={styles.activity} size='large' color='#5c0931' />
         :
-      <View>
+      <View style={styles.outFunct}>
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.username}</Text>
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.owner}</Text>
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.bio}</Text>
 
-        <TouchableOpacity onPress={()=>this.logout()}>
-                    <Text>Logout</Text>
+        <TouchableOpacity style={styles.logout} onPress={()=>this.logout()}>
+                    <Text style={styles.logoutText}>Logout</Text>
         </TouchableOpacity>
         <Text style={styles.texto}>Posts: {this.state.userPosts.length}</Text>
     
         {this.state.userPosts.length == 0 ? (
-          <Text>No hay posteos</Text>
+          <Text style={styles.textoFino}> Ups! No hiciste posteos</Text>
         ) : (
           <FlatList
             data={this.state.userPosts}
@@ -123,12 +123,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  outFunct: {
-    flexDirection: 'row',
-    width: '100%',
+  logout:{
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexDirection:'row',
     justifyContent: 'flex-end',
-    delete: {
-    }
+    backgroundColor: '#443742',
+  },
+  logoutText:{
+    color:'white'
+  },
+  outFunct: {
+    flexDirection: 'column',
+    width: '100%',
+    justifyContent: 'center'
   },
   imagen: {
     height: 100,
@@ -138,13 +146,21 @@ const styles = StyleSheet.create({
   },
   texto: {
     fontWeight: 'bold',
-    color: 'white',
+    color: '#443742',
     fontSize: 17,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
     bio: {
       fontWeight: 'normal',
       color: 'white',
       fontSize: 15
     }
+  },
+  textoFino:{
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   activity: {
     marginTop: 250
