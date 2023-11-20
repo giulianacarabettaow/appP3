@@ -183,7 +183,7 @@ class PostDos extends Component {
                       </View>} 
               />                  
                 </View>
-                    {/* No anda la redireccion a Comments! */}
+
                 <View style={styles.input}>
                 <TouchableOpacity style={styles.button} onPress={()=>this.navegarComment()} >
                         <Text style={styles.textButton}> Leer comentarios... </Text>
