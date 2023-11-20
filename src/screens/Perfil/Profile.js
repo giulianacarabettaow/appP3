@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { db, auth } from '../../firebase/config';
 
 
-import Post from '../../components/Post';
+import Post from '../../components/postDos';
 import React from 'react';
 
 class Profile extends Component {
@@ -91,6 +91,7 @@ render() {
               <Post
                 propsNav={this.props}
                 postInfo={item}
+                style={styles.posts}
               />
             )}
           />
@@ -158,6 +159,12 @@ const styles = StyleSheet.create({
   textoFino:{
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  posts:{
+    display:'flex',
+    flexWrap: 'wrap',
+    flexDirection:'column',
     justifyContent: 'center'
   },
   activity: {

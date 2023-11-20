@@ -1,5 +1,5 @@
 import react, { Component } from 'react';
-import {TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
+import {TextInput, TouchableOpacity, View, Text, StyleSheet, ActivityIndicator, FlatList, Image} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
@@ -137,13 +137,14 @@ class PostDos extends Component {
           
            <View >
                 
-                <Text>{this.state.email}</Text>
-                <Text>{this.state.texto}</Text>
+                <Text style={styles.dataImportante}>{this.state.email}</Text>
                 <Text>{this.state.userInfo[0]?.data.username}</Text>
                 
+                <Image source={{ uri: 'https://cdn.theculturetrip.com/wp-content/uploads/2017/12/coffee-2589759_1280.jpg' }} style={styles.image}/>
+                <Text>{this.state.texto}</Text>
                 <View style={styles.botoncitos}>
-                    <Text style={styles.input} ># likes: {this.state.howManyLikes}</Text>
-                    <Text style={styles.input}># Comentarios: {this.state.howManyComments}</Text>
+                    <Text style={styles.inputLikes} ># likes: {this.state.howManyLikes}</Text>
+                    <Text style={styles.inputLikes}># Comentarios: {this.state.howManyComments}</Text>
                 </View>
                 
 
@@ -154,7 +155,7 @@ class PostDos extends Component {
                 :
                 
                 <TouchableOpacity onPress={()=> this.like()}>
-                <Text> Like </Text>
+                <Text style={styles.botonLike}> Like </Text>
                 </TouchableOpacity>
                 }
                 <View>
@@ -167,7 +168,7 @@ class PostDos extends Component {
                         />
                     
                     <TouchableOpacity onPress={() => this.comment(this.state.comment)}>
-                        <Text style={styles.boton}>Comment</Text>
+                        <Text style={styles.botonLike}>Comment</Text>
                     </TouchableOpacity>
                     {this.state.emptyComment != '' ? <Text>{this.state.emptyComment}</Text>: false}
                 
@@ -183,6 +184,7 @@ class PostDos extends Component {
                       </View>} 
               />                  
                 </View>
+                
                     {/* No anda la redireccion a Comments! */}
                 <View style={styles.input}>
                 <TouchableOpacity style={styles.button} onPress={()=>this.navegarComment()} >
@@ -210,6 +212,14 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row'
     },
+    dataImportante:{
+        fontWeight: 'bold'
+    },
+    image:{
+        height: 200,
+        margin: 15,
+        borderRadius:10
+    },
     input:{
         height:20,
         paddingVertical:15,
@@ -219,6 +229,24 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 6,
         marginVertical:10,
+    },
+    inputLikes:{
+        height:20,
+        paddingVertical:15,
+        paddingHorizontal: 10,
+        borderWidth:1,
+        borderStyle: 'solid',
+        borderRadius: 6,
+        marginVertical:10,
+        backgroundColor: '00916E',
+    },
+    botonLike:{
+        backgroundColor: '#348AA7',
+        borderWidth:1,
+        padding:5,
+        // borderStyle: 'solid',
+        borderRadius: 6,
+        color: 'white',
     },
     button:{
         margin:50,
