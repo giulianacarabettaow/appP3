@@ -7,7 +7,7 @@ import { db, auth } from '../../firebase/config';
 import Post from '../../components/Post';
 import React from 'react';
 
-class Profile extends Component {
+class notMeProfile extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -22,13 +22,13 @@ class Profile extends Component {
         
 getUserData(){
 
-    let user = ''
-    if (this.props.route.params) {
-      this.setState({reloadedProfile:true})
-      user = this.props.route.params.user
-    } else {
-      user = auth.currentUser.email
-    } console.log(user)
+    let user = this.props.route.params.user
+    // if (this.props.route.params) {
+    //   this.setState({reloadedProfile:true})
+    //   user = this.props.route.params.user
+    // } else {
+    //   user = auth.currentUser.email
+    // } console.log(user)
     db.collection("user").where("owner", '==', user)
     .onSnapshot((docs) => {
       let userInfo = [];
@@ -62,15 +62,14 @@ getUserPosts(user) {
     });
   }
 
-  logout(){
-    auth.signOut();
-   //   Redirigir al usuario a la home del sitio.
-     this.props.navigation.navigate('Login')
-  }
   
 componentDidMount(){
   this.getUserData()
 }
+
+ backToHome(){
+    this.props.navigation.navigate('Home')
+  }
 
 render() {
   console.log(this.state),
@@ -81,9 +80,7 @@ render() {
       <View>
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.username}</Text>
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.owner}</Text>
-        <TouchableOpacity onPress={()=>this.logout()}>
-                    <Text>Logout</Text>
-        </TouchableOpacity>
+   
         <Text style={styles.texto}>Posts: {this.state.userPosts.length}</Text>
     
         {this.state.userPosts.length == 0 ? (
@@ -100,7 +97,8 @@ render() {
             )}
           />
         )}
-        
+        <TouchableOpacity onPress={()=> this.backToHome()}><Text>Volver a home</Text></TouchableOpacity>
+
       </View>
   )}
 }
@@ -179,4 +177,4 @@ const styles = StyleSheet.create({
 
 
 
-export default Profile
+export default notMeProfile

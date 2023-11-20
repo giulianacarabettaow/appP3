@@ -62,11 +62,9 @@ class Comments extends Component {
             this.setState({emptyComment: 'No puedes enviar un comentario vacío'})
         }
     }
-    
     backToHome(){
       this.props.navigation.navigate('Home')
     }
-
     render(){
     console.log(this.state.comentarios)
         return(
@@ -78,7 +76,7 @@ class Comments extends Component {
                   keyExtractor={( item ) => item.createdAt.toString()}
                   renderItem={({item}) => 
                       <View >
-                        <TouchableOpacity onPress={()=> this.props.navigation.navigate('Profile', {user:item.email})} >
+                        <TouchableOpacity onPress={()=> this.props.navigation.navigate('notMeProfile', {user:item.email})} >
                         <Text>{item.ownerUsername}</Text>
                         </TouchableOpacity>
                         <Text>{item.texto}</Text>
@@ -98,10 +96,8 @@ class Comments extends Component {
                 <Text style={styles.boton}>Comment</Text>
             </TouchableOpacity>
             {this.state.emptyComment != '' ? <Text>{this.state.emptyComment}</Text>: false}
-
-            <TouchableOpacity onPress={()=> this.backToHome()}><Text>Volver a home</Text></TouchableOpacity>
-
         </View>
+        <TouchableOpacity onPress={()=> this.backToHome()}><Text>Volver a home</Text></TouchableOpacity>
         </React.Fragment>
         )
       }
