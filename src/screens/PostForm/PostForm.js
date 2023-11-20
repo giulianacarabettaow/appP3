@@ -62,7 +62,19 @@ const styles = StyleSheet.create({
         paddingHorizontal:10,
         marginTop: 20,
     },
+    botoncitos:{
+        display: 'flex',
+        flexDirection: 'row'
+    },
     input:{
+        // height:20,
+        // paddingVertical:15,
+        // paddingHorizontal: 10,
+        // borderWidth:1,
+        // borderColor: '#ccc',
+        // borderStyle: 'solid',
+        // borderRadius: 6,
+        // marginVertical:10,
         height:20,
         paddingVertical:15,
         paddingHorizontal: 10,
@@ -73,29 +85,35 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginVertical:10,
     },
-    camera:{
-        height: 100
-    },
     button:{
         backgroundColor:'#846C5B',
-        padding: 10,
+        paddingHorizontal: 10,
+        paddingVertical: 6,
         textAlign: 'center',
-        height:30,
+        borderRadius:15,
         borderWidth:1,
-        borderRadius: 15,
         borderStyle: 'solid',
-        borderColor: '#443742',
-        display: 'flex',
+        borderColor: '#443742'
     },
     textButton:{
         color: '#fff',
         display: 'flex',
         justifyContent:'center',
         alignContent: 'center',
-
+    },
+    comentariosHome:{
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    delete:{
+        display: 'flex',
+        justifyContent:'center',
+        alignContent: 'center',
     }
 
+
 })
+
 
 
 export default PostForm;

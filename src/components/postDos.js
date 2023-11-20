@@ -140,9 +140,11 @@ class PostDos extends Component {
                 <Text>{this.state.email}</Text>
                 <Text>{this.state.texto}</Text>
                 <Text>{this.state.userInfo[0]?.data.username}</Text>
-
-                <Text style={styles.input} ># likes: {this.state.howManyLikes}</Text>
-                <Text style={styles.input}># Comentarios: {this.state.howManyComments}</Text>
+                
+                <View style={styles.botoncitos}>
+                    <Text style={styles.input} ># likes: {this.state.howManyLikes}</Text>
+                    <Text style={styles.input}># Comentarios: {this.state.howManyComments}</Text>
+                </View>
                 
 
                 {this.state.myLike  ?  
@@ -184,7 +186,7 @@ class PostDos extends Component {
                     {/* No anda la redireccion a Comments! */}
                 <View style={styles.input}>
                 <TouchableOpacity style={styles.button} onPress={()=>this.navegarComment()} >
-                        <Text> Leer comentarios... </Text>
+                        <Text style={styles.textButton}> Leer comentarios... </Text>
                 </TouchableOpacity>
                 </View>
                 {
@@ -204,6 +206,10 @@ const styles = StyleSheet.create({
         paddingHorizontal:10,
         marginTop: 20,
     },
+    botoncitos:{
+        display: 'flex',
+        flexDirection: 'row'
+    },
     input:{
         height:20,
         paddingVertical:15,
@@ -215,17 +221,18 @@ const styles = StyleSheet.create({
         marginVertical:10,
     },
     button:{
-        backgroundColor:'#28a745',
+        margin:50,
+        backgroundColor:'#846C5B',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
-        borderRadius:4,
+        borderRadius:15,
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#443742'
     },
     textButton:{
-        color: '#fff'
+        color: 'white'
     }
 
 })
