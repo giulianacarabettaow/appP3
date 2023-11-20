@@ -69,7 +69,7 @@ class Search extends Component {
           <FlatList
                     data={this.state.usuariosFiltrados}
                     keyExtractor={user => user.id.toString()}
-                    renderItem={({ item }) =>  <User user={item}   />  }
+                    renderItem={({ item }) =>  <User user={item}  propsNav={this.props} />  }
                 />
           </View>
 
