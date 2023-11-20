@@ -79,9 +79,9 @@ render() {
   return ( 
     
       <View style={styles.outFunct}>
-        <Text style={styles.texto}>{this.state.userInfo[0]?.data.username}</Text>
-        <Text style={styles.texto}>{this.state.userInfo[0]?.data.owner}</Text>
-        <Text style={styles.texto}>{this.state.userInfo[0]?.data.bio}</Text>
+        <Text style={styles.textoProfile}>{this.state.userInfo[0]?.data.username}</Text>
+        <Text style={styles.textoProfile}>{this.state.userInfo[0]?.data.owner}</Text>
+        <Text style={styles.textoProfile}>{this.state.userInfo[0]?.data.bio}</Text>
 
         <TouchableOpacity style={styles.logout}onPress={()=>this.logout()}>
                     <Text style={styles.logoutText}>Logout</Text>
@@ -152,6 +152,15 @@ const styles = StyleSheet.create({
       color: 'white',
       fontSize: 15
     }
+  },
+  textoProfile:{
+    backgroundColor:'#443742',
+    fontWeight:'bold',
+    color: 'white',
+    fontSize: 17,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   textoFino:{
     display: 'flex',
