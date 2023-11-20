@@ -124,15 +124,18 @@ class Post extends Component {
         console.log('id',this.props.postInfo.id)
 
         return(
-          
+        //   <Tab.Navigator></Tab.Navigator>
            <View >
-                
-                <Text>{this.state.email}</Text>
-                <Text>{this.state.texto}</Text>
-                <Text>{this.state.userInfo[0]?.data.username}</Text>
 
-                <Text style={styles.input} ># likes: {this.state.howManyLikes}</Text>
-                <Text style={styles.input}># Comentarios: {this.state.howManyComments}</Text>
+                <Text>{this.state.email}</Text>
+                <Text>{this.state.texto}</Text> 
+                <Text>{this.state.userInfo[0]?.data.username}</Text> 
+                {/* por alguna razon no se muestra el 3er text, pero puede ser porque no me anda firebase (soy giu) */}
+
+                <View style={styles.botoncitos}>
+                    <TouchableOpacity style={styles.input} ># likes: {this.state.howManyLikes}</TouchableOpacity>
+                    <TouchableOpacity style={styles.input}># Comentarios: {this.state.howManyComments}</TouchableOpacity>
+                </View>
                 
 
                 {this.state.myLike  ?  
@@ -145,7 +148,7 @@ class Post extends Component {
                 <Text> Like </Text>
                 </TouchableOpacity>
                 }
-                <View>
+                <View style={styles.comentariosHome}>
                     <TextInput
                         style={styles.input}
                         keyboardType='default'
@@ -167,7 +170,7 @@ class Post extends Component {
                 </View>
                 {
                 auth.currentUser.email === this.props.postInfo.data.owner ?
-                        <TouchableOpacity onPress={() => this.deletePost()}><Text>Borrar posteo</Text>
+                        <TouchableOpacity onPress={() => this.deletePost()} style={styles.delete}><Text>Borrar posteo</Text>
                         </TouchableOpacity>
                         :
                     false
@@ -182,29 +185,55 @@ const styles = StyleSheet.create({
         paddingHorizontal:10,
         marginTop: 20,
     },
+    botoncitos:{
+        display: 'flex',
+        flexDirection: 'row'
+    },
     input:{
+        // height:20,
+        // paddingVertical:15,
+        // paddingHorizontal: 10,
+        // borderWidth:1,
+        // borderColor: '#ccc',
+        // borderStyle: 'solid',
+        // borderRadius: 6,
+        // marginVertical:10,
         height:20,
         paddingVertical:15,
         paddingHorizontal: 10,
         borderWidth:1,
         borderColor: '#ccc',
+        backgroundColor:  '#E0E0E0',
         borderStyle: 'solid',
-        borderRadius: 6,
+        borderRadius: 10,
         marginVertical:10,
     },
     button:{
-        backgroundColor:'#28a745',
+        backgroundColor:'#846C5B',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
-        borderRadius:4,
+        borderRadius:15,
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#443742'
     },
     textButton:{
-        color: '#fff'
+        color: '#fff',
+        display: 'flex',
+        justifyContent:'center',
+        alignContent: 'center',
+    },
+    comentariosHome:{
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    delete:{
+        display: 'flex',
+        justifyContent:'center',
+        alignContent: 'center',
     }
+
 
 })
 

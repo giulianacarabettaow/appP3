@@ -69,14 +69,14 @@ class Comments extends Component {
     console.log(this.state.comentarios)
         return(
           <React.Fragment>
-            <View >
+            <View style={styles.comentarios}>
               <Text>comentarios</Text>
               <FlatList
                   data={this.state.comentarios.sort((a, b) => b.createdAt - a.createdAt)}
                   keyExtractor={( item ) => item.createdAt.toString()}
                   renderItem={({item}) => 
-                      <View >
-                        <TouchableOpacity onPress={()=> this.props.navigation.navigate('notMeProfile', {user:item.email})} >
+                      <View style={styles.commentBox}>
+                        <TouchableOpacity onPress={()=> this.props.navigation.navigate('Profile', {user:item.email})} style={styles.commentBox.commentOwner}>
                         <Text>{item.ownerUsername}</Text>
                         </TouchableOpacity>
                         <Text>{item.texto}</Text>
@@ -107,8 +107,35 @@ class Comments extends Component {
 
 const styles = StyleSheet.create({
     formContainer:{
+        flex:1,
+        alignItems:'center',
         paddingHorizontal:10,
         marginTop: 20,
+    },
+    comentarios:{
+      textAlign: 'center',
+      border: '1px solid #5c0931',
+      width: '100%',
+      backgroundColor: 'white'
+    },
+    commentBox:{
+      flexDirection: 'row',
+      width: '100%',
+      justifyContent: 'flex-start',
+      padding: 5,
+      commentOwner: {
+          width: 'auto',
+          textAlign: 'start',
+          owner: {
+              fontWeight: 550,
+              fontSize: 15
+          }
+      },
+      texto: {
+          width: 'auto',
+          textAlign: 'start',
+          fontSize: 15
+      }
     },
     input:{
         height:20,
@@ -131,7 +158,9 @@ const styles = StyleSheet.create({
         borderColor: '#28a745'
     },
     textButton:{
-        color: '#fff'
+        color: '#fff',
+        fontSize: 10,
+        backgroundColor:'#348AA7',
     }
 
 })

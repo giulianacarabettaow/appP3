@@ -35,20 +35,19 @@ class PostForm extends Component {
         return(
             <View>
              <View style={styles.formContainer}>
-                    <Text>Nuevo post</Text>
-
+                    <Text>Crea una nueva publicación</Text>
                     {/* <MyCamera style={styles.camera}/> */}
-
+                    {/*Acá iria el campo de la foto y el preview etc */}
                     <TextInput
                         style={styles.input}
                         onChangeText={(text)=>this.setState({Post: text})}
-                        placeholder='Desc...'
+                        placeholder='Agrega un pie de foto'
                         keyboardType='default'
                         value={this.state.Post}
                     />
              </View>
                 <TouchableOpacity style={styles.button} onPress={()=>this.crearPost(auth.currentUser.email,this.state.Post, Date.now() )}>
-                    <Text> Enviar </Text>
+                    <Text style={styles.textButton}> Enviar </Text>
                 </TouchableOpacity>
             </View>
 
@@ -69,28 +68,34 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         borderWidth:1,
         borderColor: '#ccc',
+        backgroundColor:  '#E0E0E0',
         borderStyle: 'solid',
-        borderRadius: 6,
+        borderRadius: 10,
         marginVertical:10,
     },
-    // camera:{
-    //     height: 100
-    // },
+    camera:{
+        height: 100
+    },
     button:{
-        backgroundColor:'#28a745',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
+        backgroundColor:'#846C5B',
+        padding: 10,
         textAlign: 'center',
-        borderRadius:4,
+        height:30,
         borderWidth:1,
+        borderRadius: 15,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#443742',
+        display: 'flex',
     },
     textButton:{
-        color: '#fff'
+        color: '#fff',
+        display: 'flex',
+        justifyContent:'center',
+        alignContent: 'center',
+
     }
 
 })
 
 
-export default PostForm
+export default PostForm;

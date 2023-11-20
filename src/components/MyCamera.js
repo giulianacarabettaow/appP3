@@ -13,7 +13,7 @@ class MyCamera extends Component {
             showCamera: true,
         }
 
-        this.cameraMethods = '' //referenciar a los metodos internos del componente camera
+        this.cameraMethods = '' //referenciar a los metodos internos del componente camera. es una variable vacía
 
     }
 
@@ -34,7 +34,8 @@ class MyCamera extends Component {
             <View>
             <Camera
             type={Camera.Constants.Type.front}
-            ref= {cameraMethods => this.cameraMethods = cameraMethods}/>
+            ref= {cameraMethods => this.cameraMethods = cameraMethods}
+            style= {styles.camera}/>
             <TouchableOpacity>
                 <Text> Tomar foto</Text>
             </TouchableOpacity>
@@ -42,7 +43,14 @@ class MyCamera extends Component {
 
         )
     }
+    
 
 }
+    // const styles= StyleSheet.create({
+    //     camera:{
+    //         display: 'flex',
+    //         height:20,
+    //     }
+    // })
 
 export default MyCamera;
