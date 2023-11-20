@@ -76,7 +76,7 @@ class Comments extends Component {
                   keyExtractor={( item ) => item.createdAt.toString()}
                   renderItem={({item}) => 
                       <View style={styles.commentBox}>
-                        <TouchableOpacity onPress={()=> this.props.navigation.navigate('Profile', {user:item.email})} style={styles.commentBox.commentOwner}>
+                        <TouchableOpacity onPress={()=> this.props.navigation.navigate('notMeProfile', {user:item.email})} style={styles.commentBox.commentOwner}>
                         <Text>{item.ownerUsername}</Text>
                         </TouchableOpacity>
                         <Text>{item.texto}</Text>

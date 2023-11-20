@@ -5,7 +5,6 @@ import { FontAwesome } from '@expo/vector-icons';
 import { MyCamera } from '../../components/MyCamera';
 
 
-
 class PostForm extends Component {
     constructor(){
         super()
@@ -52,9 +51,7 @@ class PostForm extends Component {
             </View>
 
         )
-
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -73,9 +70,9 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginVertical:10,
     },
-    camera:{
-        height: 100
-    },
+    // camera:{
+    //     height: 100
+    // },
     button:{
         backgroundColor:'#846C5B',
         padding: 10,
@@ -96,6 +93,5 @@ const styles = StyleSheet.create({
     }
 
 })
-
 
 export default PostForm;
