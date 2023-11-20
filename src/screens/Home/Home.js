@@ -27,6 +27,8 @@ class Home extends Component {
             })
     }
 
+
+
     // logut va en en el perfil
     //  logout(){
     //      auth.signOut();
@@ -58,6 +60,7 @@ class Home extends Component {
         )
     }
 }
+
 const styles = StyleSheet.create({
     generalContainer:{
         flex: 1,
