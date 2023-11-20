@@ -21,14 +21,7 @@ class Profile extends Component {
     }
         
 getUserData(){
-
-    let user = ''
-    if (this.props.route.params) {
-      this.setState({reloadedProfile:true})
-      user = this.props.route.params.user
-    } else {
-      user = auth.currentUser.email
-    } console.log(user)
+    let user = auth.currentUser.email
     db.collection("user").where("owner", '==', user)
     .onSnapshot((docs) => {
       let userInfo = [];

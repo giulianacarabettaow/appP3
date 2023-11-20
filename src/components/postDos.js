@@ -176,7 +176,7 @@ class PostDos extends Component {
                         keyExtractor={( item ) => item.createdAt.toString()}
                         renderItem={({item}) => 
                       <View >
-                        <TouchableOpacity onPress={()=> this.props.propsNav.navigation.navigate('Profile', {user:item.email})} >
+                        <TouchableOpacity onPress={()=> this.props.propsNav.navigation.navigate('notMeProfile', {user:item.email})} >
                         <Text>{item.ownerUsername}</Text>
                         </TouchableOpacity>
                         <Text>{item.texto}</Text>
