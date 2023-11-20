@@ -25,11 +25,12 @@ class Login extends Component{
              this.state.password != '' && this.state.email != ''  ? this.props.navigation.navigate('Menu') : false    
         )) 
         .catch( error => {
-            this.setState({errorMessage: error.message},()=>console.log(this.state, error))
+            this.setState({errorMessage: error.message},()=>console.log(this.state))
         })
     }
 
     render(){
+        console.log(this.state.errorMessage);
         return(
             <View>
             <View style={styles.formContainer}>
@@ -65,13 +66,14 @@ class Login extends Component{
                     <TouchableOpacity style={styles.button} onPress={() => this.login(this.state.email, this.state.password)} >
                         <Text> Enviar </Text>
                     </TouchableOpacity>
-                    {this.state.errorMessage !== ''? <Text style={styles.input}>{this.state.errorMessage}</Text> : ''}
                     {console.log('Logueado',this.state.loggedIN)}
                 </View>
 
             }
         
             </View>
+            
+            {this.state.errorMessage !== ''? <Text style={styles.input}>{this.state.errorMessage}</Text> : ''}
 
 
             <View style={styles.input}>

@@ -20,7 +20,9 @@ class User extends Component {
             <Text>Resultado de busqueda</Text>
 
             <View>
+            <TouchableOpacity onPress={()=> this.props.propsNav.navigation.navigate('notMeProfile', {user:this.props.user.data.owner})} style={styles.commentBox.commentOwner}>
             <Text>{this.props.user.data.username}</Text>
+            </TouchableOpacity>
             <Text>{this.props.user.data.owner}</Text>
             <Text>{this.props.user.data.bio}</Text>
             </View>
@@ -56,8 +58,26 @@ const styles = StyleSheet.create({
     },
     textButton:{
         color: '#fff'
-    }
-
+    },
+    commentBox:{
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'flex-start',
+        padding: 5,
+        commentOwner: {
+            width: 'auto',
+            textAlign: 'start',
+            owner: {
+                fontWeight: 550,
+                fontSize: 15
+            }
+        },
+        texto: {
+            width: 'auto',
+            textAlign: 'start',
+            fontSize: 15
+        }
+      },
 })
 
 
