@@ -9,6 +9,7 @@ import Register from '../screens/Register/Register';
 import Menu from './Menu';
 import Comments from '../screens/Comments/Comments';
 import Profile from '../screens/Perfil/Profile';
+import notMeProfile from '../screens/notMeProfile/notMeProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,7 +31,8 @@ class Principal extends Component {
               <Stack.Screen name='Login' component={Login} options={{headerShown :false}} />
               <Stack.Screen name='Menu' component={Menu} options={{headerShown :false}} />
               <Stack.Screen name='Comments' component={Comments} options={{headerShown :false}} />
-              <Stack.Screen name="Go Back" component={Profile} />
+              {/* <Stack.Screen name="Go Back" component={Profile} /> */}
+              <Stack.Screen name="notMeProfile" component={notMeProfile} options={{headerShown :false}} />
             </Stack.Navigator>
     
           </NavigationContainer>

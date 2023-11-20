@@ -7,7 +7,7 @@ import { db, auth } from '../../firebase/config';
 import Post from '../../components/Post';
 import React from 'react';
 
-class Profile extends Component {
+class notMeProfile extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -22,13 +22,13 @@ class Profile extends Component {
         
 getUserData(){
 
-    let user = ''
-    if (this.props.route.params) {
-      this.setState({reloadedProfile:true})
-      user = this.props.route.params.user
-    } else {
-      user = auth.currentUser.email
-    } console.log(user)
+    let user = this.props.route.params.user
+    // if (this.props.route.params) {
+    //   this.setState({reloadedProfile:true})
+    //   user = this.props.route.params.user
+    // } else {
+    //   user = auth.currentUser.email
+    // } console.log(user)
     db.collection("user").where("owner", '==', user)
     .onSnapshot((docs) => {
       let userInfo = [];
@@ -62,15 +62,14 @@ getUserPosts(user) {
     });
   }
 
-  logout(){
-    auth.signOut();
-   //   Redirigir al usuario a la home del sitio.
-     this.props.navigation.navigate('Login')
-  }
   
 componentDidMount(){
   this.getUserData()
 }
+
+ backToHome(){
+    this.props.navigation.navigate('Home')
+  }
 
 render() {
   console.log(this.state),
@@ -78,18 +77,14 @@ render() {
 
   return ( 
     
-      <View style={styles.outFunct}>
+      <View>
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.username}</Text>
         <Text style={styles.texto}>{this.state.userInfo[0]?.data.owner}</Text>
-        <Text style={styles.texto}>{this.state.userInfo[0]?.data.bio}</Text>
-
-        <TouchableOpacity style={styles.logout}onPress={()=>this.logout()}>
-                    <Text style={styles.logoutText}>Logout</Text>
-        </TouchableOpacity>
+   
         <Text style={styles.texto}>Posts: {this.state.userPosts.length}</Text>
     
         {this.state.userPosts.length == 0 ? (
-          <Text style={styles.textoFino}> Ups! No hiciste posteos</Text>
+          <Text>No hay posteos</Text>
         ) : (
           <FlatList
             data={this.state.userPosts}
@@ -102,7 +97,8 @@ render() {
             )}
           />
         )}
-        
+        <TouchableOpacity onPress={()=> this.backToHome()}><Text>Volver a home</Text></TouchableOpacity>
+
       </View>
   )}
 }
@@ -119,20 +115,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  logout:{
-    display: 'flex',
-    flexWrap: 'wrap',
-    flexDirection:'row',
-    justifyContent: 'flex-end',
-    backgroundColor: '#443742',
-  },
-  logoutText:{
-    color:'white'
-  },
   outFunct: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     width: '100%',
-    justifyContent: 'center'
+    justifyContent: 'flex-end',
+    delete: {
+    }
   },
   imagen: {
     height: 100,
@@ -142,21 +130,13 @@ const styles = StyleSheet.create({
   },
   texto: {
     fontWeight: 'bold',
-    color: '#443742',
+    color: 'white',
     fontSize: 17,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
     bio: {
       fontWeight: 'normal',
       color: 'white',
       fontSize: 15
     }
-  },
-  textoFino:{
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center'
   },
   activity: {
     marginTop: 250
@@ -197,4 +177,4 @@ const styles = StyleSheet.create({
 
 
 
-export default Profile
+export default notMeProfile
